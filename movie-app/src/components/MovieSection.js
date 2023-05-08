@@ -10,9 +10,7 @@ export default function MovieSection() {
             <Row>
                 <SearchBar setMovies={setMovies}/>
             </Row>
-            <Row>
-                <MoviesList movies={movies}/>
-            </Row>
+            <MoviesList movies={movies}/>
 
         </Col>
     )

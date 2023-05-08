@@ -9,15 +9,20 @@ export default function SearchBar({setMovies}) {
         e.preventDefault();
         const url = search_url
             .replace("<api_key>", TMDB_API_KEY)
-            .replace("<query>", e.target.form[0].value);
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        setMovies(data.results);
+            .replace("<query>", e.target[0].value);
+        try {
+
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data);
+            setMovies(data.results);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return (
-        <Form className={"mt-2"}>
+        <Form className={"mt-2"} onSubmit={onSubmit}>
             <InputGroup className="m-2">
                 <Form.Control
                     type="text"
@@ -26,7 +31,7 @@ export default function SearchBar({setMovies}) {
                     aria-label="Search for a movie"
                     aria-describedby="movie-search"
                 />
-                <Button variant="outline-secondary" type="submit" onClick={onSubmit}>Submit</Button>
+                <Button variant="outline-secondary" type="submit">Submit</Button>
             </InputGroup>
         </Form>
     )

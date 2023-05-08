@@ -1,16 +1,17 @@
 import MovieItem from "./MovieItem";
+import {Row} from "react-bootstrap";
 
 export default function MoviesList({movies}) {
     return (
-        <div>
+        <Row>
             {movies.map(movie => {
                     return (
-                        <div key={movie.id}>
+                        <div key={movie.id} className={"col-8 col-sm-5 col-md-3 col-lg-2 m-1"}>
                             <MovieItem movie={movie}/>
                         </div>
                     )
                 }
             )}
-        </div>
+        </Row>
     )
 }

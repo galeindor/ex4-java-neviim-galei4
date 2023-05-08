@@ -6,7 +6,6 @@ export default function HomePage() {
         <Container>
             <Row>
                 <MovieSection/>
-                <div className={"col-0 col-lg-6"}></div>
             </Row>
         </Container>
     )
