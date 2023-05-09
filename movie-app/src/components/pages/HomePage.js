@@ -1,5 +1,5 @@
 import {Container, Row} from "react-bootstrap";
-import MovieSection from "./MovieSection";
+import MovieSection from "../MovieSection";
 
 export default function HomePage() {
     return (

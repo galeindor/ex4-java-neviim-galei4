@@ -11,6 +11,7 @@ export default function MovieItem({movie}) {
     function MouseOut(){
         setIsHovered(false);
     }
+
     const img_url = movie.poster_path ?`https://image.tmdb.org/t/p/original${movie.poster_path}` : './default.jpg';
 
     useEffect(() => {
@@ -23,7 +24,7 @@ export default function MovieItem({movie}) {
         console.log("show less");
         const words = movie.overview.split(" ");
         let newOverview = "";
-        while (newOverview.length < 100) {
+        while (newOverview.length < 50) {
             newOverview += " " + words.shift();
         }
         newOverview += "...";
@@ -39,7 +40,7 @@ export default function MovieItem({movie}) {
 
     return (
         <Card onMouseEnter={MouseOver} onMouseLeave={MouseOut} style={{backgroundColor: isHovered ?"#CCD1D1" : "#E5E8E8",borderWidth: 3 , fontFamily: "serif"}}>
-            <h2>{movie.title}</h2>
+            <h3>{movie.title}</h3>
             <img src={img_url} alt={movie.title} className="img-fluid m-1"/>
             <p className={"m-1"}>{overview}</p>
             {longOverview && <Button variant="outline-secondary" className={"m-1"} onClick={show ? showLessOverview : showAllOverview } >Read more</Button>}
