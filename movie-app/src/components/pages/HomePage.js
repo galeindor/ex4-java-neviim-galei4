@@ -29,6 +29,7 @@ export default function HomePage() {
                 const response = await axios(url);
                 const data = response.data;
                 await setMedia(data.results);
+                console.log(data.results);
                 setMessage('Trending Today')
             } catch (e) {
                 console.log(e);

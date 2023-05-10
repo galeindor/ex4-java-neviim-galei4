@@ -11,10 +11,9 @@ export default function SearchBar({setMedia}) {
             .replace("<api_key>", TMDB_API_KEY)
             .replace("<query>", e.target[0].value);
         try {
-
             const response = await axios.get(url);
             const data = response.data;
-            console.log(data);
+            console.log(data.results);
             setMedia(data.results);
         } catch (e) {
             console.log(e);
