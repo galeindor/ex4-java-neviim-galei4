@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Product implements Serializable {
     private String name;
     private String description;
-    private static Float price;
+    private Float price;
     private String posterUrl;
 
     public Product(String name, String description, String posterUrl, Float price) {
