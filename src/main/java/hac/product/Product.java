@@ -6,16 +6,20 @@ import java.io.Serializable;
 
 @Component
 public class Product implements Serializable {
+
+    private int id;
+
     private String name;
     private String description;
     private Float price;
     private String posterUrl;
 
-    public Product(String name, String description, String posterUrl, Float price) {
+    public Product(int id,String name, String description, String posterUrl, Float price) {
         this.name = name;
         this.description = description;
         this.posterUrl = posterUrl;
         this.price = price;
+        this.id = id;
     }
 
     public Product() {
@@ -52,5 +56,13 @@ public class Product implements Serializable {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

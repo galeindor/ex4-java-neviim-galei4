@@ -1,13 +1,12 @@
-import {Card, Col, Modal, Row} from "react-bootstrap";
-import {useState} from "react";
+import {Card, Col, Modal, Row, Toast, ToastContainer} from "react-bootstrap";
+import {useEffect, useState} from "react";
 import axios from "axios";
 export default function MediaItem({item}) {
     const [isHovered, setIsHovered] = useState(false);
     const [show, setShow] = useState(false);
-
-
+    const [message, setMessage] = useState("");
     const addToCart = async () => {
-        const url = `http://localhost:8080/media`;
+        const url = `http://localhost:3000/media/`;
         const data = {
             "id": item.id,
             "name": item.name,
@@ -17,13 +16,23 @@ export default function MediaItem({item}) {
         };
         try {
             const response = await axios.post(url, data);
-            const data = response.data;
-            console.log(data);
+            const success = await response.data;
+            console.log(success);
+            setMessage(success ? "Item added to cart" : "Item already in cart")
         } catch (e) {
             console.log(e);
         }
     }
 
+    useEffect(() => {
+        if (message !== "") {
+            const timer = setTimeout(() => {
+                console.log("timer executed");
+                setMessage("");
+            }, 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [message]);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const MouseOver = () => setIsHovered(true);
@@ -41,6 +50,13 @@ export default function MediaItem({item}) {
                 <h6>{item.release_date}</h6>
             </Card>
 
+            {message &&
+                <ToastContainer className="p-3" style={{position:"fixed",right:"10px",bottom:"10px"}}>
+                    <Toast >
+                        <Toast.Body>{message}</Toast.Body>
+                    </Toast>
+                </ToastContainer>
+            }
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{item.name}</Modal.Title>
@@ -56,9 +72,10 @@ export default function MediaItem({item}) {
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                    <img src={"./icons/add_to_cart.png"} alt={"item.name"}/>
+                    <img src={"./icons/add_to_cart.png"} alt={"item.name"} onClick={addToCart}/>
                 </Modal.Footer>
             </Modal>
+
         </>
     )
 }
