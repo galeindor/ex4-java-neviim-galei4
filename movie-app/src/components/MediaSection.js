@@ -1,16 +1,16 @@
 import SearchBar from "./SearchBar";
 import {Col, Row} from "react-bootstrap";
 import {useState} from "react";
-import MoviesList from "./MoviesList";
+import MediaList from "./MediaList";
 
-export default function MovieSection() {
+export default function MediaSection() {
     const [movies, setMovies] = useState([]);
     return (
         <Col>
             <Row>
                 <SearchBar setMovies={setMovies}/>
             </Row>
-            <MoviesList movies={movies}/>
+            <MediaList movies={movies}/>
 
         </Col>
     )

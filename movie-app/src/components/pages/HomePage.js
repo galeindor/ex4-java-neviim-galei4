@@ -1,33 +1,32 @@
 import {Col, Container, Row} from "react-bootstrap";
-import MovieSection from "../MovieSection"; // TODO: check if needed
-import {useState} from "react";
+import MediaSection from "../MediaSection"; // TODO: check if needed
+
 import SearchBar from "../SearchBar";
-import MoviesList from "../MoviesList";
-import MoviesReducer from "../../reducers/MoviesReducer";
+import MediaList from "../MediaList";
+import MediaReducer from "../../reducers/MediaReducer";
 import {useReducer} from "react";
-import axios from "axios";
 
 export default function HomePage() {
-    const [movies, setMovies] = useState([]);
-    // const initialState = {
-    //     loading: false,
-    //     data: [],
-    //     error: ''
-    // }
-    // const [movies, dispatch] = useReducer(MoviesReducer, initialState, () => initialState);
-    //
-    // const fetchMovies = async (query, isSearch, isMovies,) => {
-    //     dispatch({type: 'FETCH_DATA'});
-    //     await axios.get(`http://www.omdbapi.com/?apikey=4a3b711b&s=${query}`)
-    // }
+    const [media, dispatch] = useReducer(MediaReducer, []);
+    const test = [];
+    test.map((item) => {
+        console.log(item);
+    });
+
+    const setMedia = async (data) => {
+        dispatch({type: 'RESET', payload: data});
+        for (const item of data) {
+            dispatch({type: item.media_type.toUpperCase(), payload: item});
+        }
+    }
 
     return (
         <Container>
             <Col>
                 <Row>
-                    <SearchBar setMovies={setMovies}/>
+                    <SearchBar setMedia={setMedia}/>
                 </Row>
-                <MoviesList movies={movies}/>
+                <MediaList media={media}/>
 
             </Col>
         </Container>

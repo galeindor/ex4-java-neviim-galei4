@@ -11,7 +11,7 @@ export default function ShoppingCartTable() {
             duration: "2h 22min",
             genre: ["Crime", "Drama"],
             rate: 9.3,
-            posterUrl: "./default.jpg",
+            posterUrl: "./default.png",
             price: "6̶.̶9̶9̶$̶ 3.99$"
 
         }
