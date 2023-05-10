@@ -1,9 +1,10 @@
 import {Button, Form, InputGroup} from "react-bootstrap";
+import axios from "axios";
 
 export default function SearchBar({setMovies}) {
 
     const TMDB_API_KEY = 'b7ef44e0770027ed8afb1e9de0dc646b'; // TODO: must be in .env file
-    const search_url = "https://api.themoviedb.org/3/search/movie?api_key=<api_key>&query=<query>&include_adult=false";
+    const search_url = "https://api.themoviedb.org/3/search/multi?api_key=<api_key>&query=<query>&include_adult=false";
 
     async function onSubmit(e) {
         e.preventDefault();
@@ -12,8 +13,8 @@ export default function SearchBar({setMovies}) {
             .replace("<query>", e.target[0].value);
         try {
 
-            const response = await fetch(url);
-            const data = await response.json();
+            const response = await axios.get(url);
+            const data = response.data;
             console.log(data);
             setMovies(data.results);
         } catch (e) {
@@ -22,17 +23,17 @@ export default function SearchBar({setMovies}) {
     }
 
     return (
-        <Form className={"mt-2"} onSubmit={onSubmit}>
-            <InputGroup className="m-2">
-                <Form.Control
-                    type="text"
-                    name={"search"}
-                    placeholder="Search for a movie"
-                    aria-label="Search for a movie"
-                    aria-describedby="movie-search"
-                />
-                <Button variant="outline-secondary" type="submit">Submit</Button>
-            </InputGroup>
-        </Form>
+            <Form className={"mt-2"} onSubmit={onSubmit}>
+                <InputGroup className="m-2">
+                    <Form.Control
+                        type="text"
+                        name={"search"}
+                        placeholder="Search for a movie"
+                        aria-label="Search for a movie"
+                        aria-describedby="movie-search"
+                    />
+                    <Button variant="outline-secondary" type="submit">Submit</Button>
+                </InputGroup>
+            </Form>
     )
 }

@@ -15,7 +15,7 @@ export default function MovieItem({movie}) {
     const img_url = movie.poster_path ?`https://image.tmdb.org/t/p/original${movie.poster_path}` : './default.jpg';
 
     useEffect(() => {
-        if(overview.length > 100) {
+        if(overview && overview.length > 100) {
             showLessOverview();
         }
     }, []);

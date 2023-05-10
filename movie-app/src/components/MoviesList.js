@@ -6,7 +6,7 @@ export default function MoviesList({movies}) {
         <Row>
             {movies.map(movie => {
                     return (
-                        <div key={movie.id} className={"col-8 col-sm-5 col-md-3 col-lg-2 m-1"}>
+                        <div key={movie.id} className={"col-12 col-sm-5 col-md-3 col-lg-2 m-1"}>
                             <MovieItem movie={movie}/>
                         </div>
                     )
