@@ -5,7 +5,6 @@ export default function ShoppingCartPage() {
     return (
         <Container>
             <ShoppingCartTable/>
-            
         </Container>
     )
 }

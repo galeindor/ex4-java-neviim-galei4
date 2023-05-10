@@ -1,21 +1,25 @@
 import {Card, Col, Modal, Row, Toast, ToastContainer} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {REST_API_URL, TMDB_IMAGE_BASE_URL} from "../constants";
 export default function MediaItem({item}) {
+
+    const posterPath = `${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`;
+    const img_url = item.poster_path ? posterPath : './default.png';
+
     const [isHovered, setIsHovered] = useState(false);
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState("");
     const addToCart = async () => {
-        const url = `http://localhost:3000/media/`;
         const data = {
             "id": item.id,
             "name": item.name,
-            "poster_path": item.poster_path,
+            "posterUrl": posterPath,
             "overview": item.overview,
-            "media_type": item.media_type
+            "price": 3.99,
         };
         try {
-            const response = await axios.post(url, data);
+            const response = await axios.post(REST_API_URL, data);
             const success = await response.data;
             console.log(success);
             setMessage(success ? "Item added to cart" : "Item already in cart")
@@ -38,8 +42,6 @@ export default function MediaItem({item}) {
     const MouseOver = () => setIsHovered(true);
     const MouseOut = () => setIsHovered(false);
 
-    const posterPath = `https://image.tmdb.org/t/p/original${item.poster_path}`;
-    const img_url = item.poster_path ? posterPath : './default.png';
 
     return (
         <>

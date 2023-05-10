@@ -1,21 +1,20 @@
 import CartItem from "./CartItem";
 import {Table} from "react-bootstrap";
+import {useEffect, useState} from "react";
+import {REST_API_URL} from "../constants";
+import axios, {get} from "axios";
 
 export default function ShoppingCartTable() {
-    const cart = [
-        {
-            id: 1,
-            title: "The Shawshank Redemption",
-            year: 1994,
-            director: "Frank Darabont",
-            duration: "2h 22min",
-            genre: ["Crime", "Drama"],
-            rate: 9.3,
-            posterUrl: "./default.png",
-            price: "6̶.̶9̶9̶$̶ 3.99$"
-
+    const [cart, setCart] = useState([]);
+    useEffect(() => {
+        const fetchCart = async () => {
+            const response = await axios.get(REST_API_URL);
+           setCart(await response.data);
         }
-    ]
+        fetchCart().catch((e) => {
+            console.log(e);
+        });
+    }, []);
     return (
         <Table striped bordered hover style={{fontFamily: "cursive"}}>
             <thead>
@@ -26,8 +25,8 @@ export default function ShoppingCartTable() {
                 </tr>
             </thead>
             <tbody>
-                {cart.map((movie) => (
-                    <CartItem key={movie.id} movie={movie}/>
+                {cart.map((item) => (
+                    <CartItem key={item.id} item={item}/>
 
                 ))}
             </tbody>

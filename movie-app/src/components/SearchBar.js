@@ -1,13 +1,14 @@
 import {Button, Form, InputGroup} from "react-bootstrap";
 import axios from "axios";
-import {TMDB_API_KEY} from "../constants";
+import {TMDB_API_KEY, TMDB_BASE_URL} from "../constants";
 export default function SearchBar({setMedia}) {
 
-    const search_url = "https://api.themoviedb.org/3/search/multi?api_key=<api_key>&query=<query>&include_adult=false";
+    const search_url = "${<TMDB_BASE_URL>/search/multi?api_key=<api_key>&query=<query>&include_adult=false";
 
     async function onSubmit(e) {
         e.preventDefault();
         const url = search_url
+            .replace("<TMDB_BASE_URL>", TMDB_BASE_URL)
             .replace("<api_key>", TMDB_API_KEY)
             .replace("<query>", e.target[0].value);
         try {
