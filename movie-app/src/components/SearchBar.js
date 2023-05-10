@@ -1,9 +1,8 @@
 import {Button, Form, InputGroup} from "react-bootstrap";
 import axios from "axios";
-
+import {TMDB_API_KEY} from "../constants";
 export default function SearchBar({setMedia}) {
 
-    const TMDB_API_KEY = 'b7ef44e0770027ed8afb1e9de0dc646b'; // TODO: must be in .env file
     const search_url = "https://api.themoviedb.org/3/search/multi?api_key=<api_key>&query=<query>&include_adult=false";
 
     async function onSubmit(e) {
