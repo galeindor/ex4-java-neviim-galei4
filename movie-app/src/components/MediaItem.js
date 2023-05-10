@@ -1,36 +1,37 @@
 import {Card, Col, Modal, Row, Toast, ToastContainer} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {REST_API_URL, TMDB_IMAGE_BASE_URL} from "../constants";
+import {cartConsts, ITEM_FIXED_PRICE, REST_API_URL, TMDB_IMAGE_BASE_URL} from "../constants";
 
 export default function MediaItem({item}) {
 
     const posterPath = `${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`;
     const img_url = item.poster_path ? posterPath : './default.png';
-
     const [isHovered, setIsHovered] = useState(false);
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState("");
+    const [success, setSuccess] = useState(false);
     const addToCart = async () => {
         const data = {
             "id": item.id,
             "name": item.name,
             "posterUrl": posterPath,
             "overview": item.overview,
-            "price": 3.99,
+            "price": ITEM_FIXED_PRICE
         };
         try {
             const response = await axios.post(REST_API_URL, data);
             const success = await response.data;
             console.log(success);
-            setMessage(success ? "Item added to cart" : "Item already in cart")
+            setMessage(success ? cartConsts.ADD_SUCCESS : cartConsts.ADD_FAILURE)
         } catch (e) {
-            setMessage("Problem saving item to cart, Please try again");
+            setMessage(cartConsts.ADD_ERROR);
             console.log(e);
         }
     }
 
     useEffect(() => {
+        setSuccess(message === cartConsts.ADD_SUCCESS )
         if (message !== "") {
             const timer = setTimeout(() => {
                 setMessage("");
@@ -66,13 +67,13 @@ export default function MediaItem({item}) {
             </Card>
 
             {message &&
-                <ToastContainer className="p-3" style={styles.toast}>
+                <ToastContainer className={success ? "bg-success" : "bg-danger"} style={styles.toast}>
                     <Toast >
                         <Toast.Body>{message}</Toast.Body>
                     </Toast>
                 </ToastContainer>
             }
-            <Modal className={"modal-lg"} show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{item.name}</Modal.Title>
                 </Modal.Header>
