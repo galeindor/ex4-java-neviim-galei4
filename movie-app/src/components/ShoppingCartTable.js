@@ -6,20 +6,18 @@ import axios, {get} from "axios";
 
 export default function ShoppingCartTable() {
     const [cart, setCart] = useState([]);
-    const [isEmpty, setIsEmpty] = useState(true);
+    const [isEmpty, setIsEmpty] = useState(false);
     useEffect(() => {
         const fetchCart = async () => {
             const response = await axios.get(REST_API_URL);
-            setCart(await response.data);
+            const data = response.data;
+            setCart(data);
+            setIsEmpty(data.length === 0);
         }
         fetchCart().catch((e) => {
             console.log(e);
         });
     }, []);
-
-    useEffect(() => {
-        setIsEmpty(cart.length === 0);
-    }, [cart]);
 
     return (
         <>
@@ -30,6 +28,7 @@ export default function ShoppingCartTable() {
                 <Table striped bordered hover style={{fontFamily: "cursive"}}>
                     <thead>
                     <tr>
+                        <th></th>
                         <th>Movie Poster</th>
                         <th>Movie title</th>
                         <th>Price</th>

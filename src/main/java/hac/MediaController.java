@@ -27,4 +27,14 @@ public class MediaController {
         }
         return products.add(product);
     }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteProduct(@PathVariable int id) {
+        for (Product p : products) {
+            if (p.getId() == id) {
+                return products.remove(p);
+            }
+        }
+        return false;
+    }
 }

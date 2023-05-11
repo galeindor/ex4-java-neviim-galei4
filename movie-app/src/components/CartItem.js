@@ -1,7 +1,11 @@
+import RemoveFromCartBtn from "./buttons/RemoveFromCartBtn";
+
 export default function CartItem({item}){
-    console.log(item);
     return(
         <tr>
+            <td>
+                <RemoveFromCartBtn id={item.id}/>
+            </td>
             <td>
                 <img src={item.posterUrl} width={100} alt={item.name}></img>
             </td>
