@@ -52,8 +52,8 @@ export default function MediaItem({item}) {
         },
         toast: {
             position: "fixed",
-            right: "10px",
-            bottom: "10px",
+            right: "20px",
+            bottom: "20px",
         }
     }
 

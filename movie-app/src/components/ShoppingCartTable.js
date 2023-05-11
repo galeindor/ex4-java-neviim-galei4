@@ -1,23 +1,19 @@
 import CartItem from "./CartItem";
 import {Table} from "react-bootstrap";
 import {useEffect, useState} from "react";
-import {REST_API_URL} from "../constants";
-import axios, {get} from "axios";
 
-export default function ShoppingCartTable() {
-    const [cart, setCart] = useState([]);
+export default function ShoppingCartTable({cart,setCart}) {
+
     const [isEmpty, setIsEmpty] = useState(false);
+
     useEffect(() => {
-        const fetchCart = async () => {
-            const response = await axios.get(REST_API_URL);
-            const data = response.data;
-            setCart(data);
-            setIsEmpty(data.length === 0);
-        }
-        fetchCart().catch((e) => {
-            console.log(e);
-        });
-    }, []);
+        setIsEmpty(cart.length === 0);
+    }, [cart]);
+
+    function deleteItem(id) {
+        const newCart = cart.filter((item) => item.id !== id);
+        setCart(newCart);
+    }
 
     return (
         <>
@@ -25,7 +21,7 @@ export default function ShoppingCartTable() {
                 <h2 className="text-center mt-2 text-danger">Your cart is empty, Go Shop!</h2>
             }
             {!isEmpty &&
-                <Table striped bordered hover style={{fontFamily: "cursive"}}>
+                <Table striped bordered hover style={{fontFamily: "cursive"}} className={"mt-2"}>
                     <thead>
                     <tr>
                         <th></th>
@@ -34,9 +30,9 @@ export default function ShoppingCartTable() {
                         <th>Price</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody className={"align-middle"}>
                     {cart.map((item) => (
-                        <CartItem key={item.id} item={item}/>
+                        <CartItem key={item.id} item={item} deleteItem={deleteItem}/>
 
                     ))}
                     </tbody>

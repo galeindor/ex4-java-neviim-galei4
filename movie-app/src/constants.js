@@ -13,3 +13,5 @@ export const cartConsts = {
     ADD_FAILURE: "Item already in cart",
     ADD_ERROR: "Problem saving item to cart, Please try again",
 }
+
+export const CURRENCY = '$';
