@@ -1,5 +1,6 @@
 import {Button, ListGroup} from "react-bootstrap";
 import {CURRENCY} from "../constants";
+import {Link} from "react-router-dom";
 
 
 export default function CheckoutDetails({cartItems}) {
@@ -29,7 +30,11 @@ export default function CheckoutDetails({cartItems}) {
                         <p className={"col"}>{total.toFixed(2) + CURRENCY}</p>
                     </span>
                 </ListGroup.Item>
-                <ListGroup.Item><Button variant="success">Checkout</Button></ListGroup.Item>
+                <ListGroup.Item>
+                    <Link to={`/checkout/${total.toFixed(2)}`}>
+                        <Button variant="success">Checkout</Button>
+                    </Link>
+                </ListGroup.Item>
             </ListGroup>
 
         </>

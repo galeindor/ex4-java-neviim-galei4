@@ -7,12 +7,11 @@ export default function Layout() {
             <Navbar bg="dark" variant="dark">
                 <Container fluid={true}>
                     <Navbar.Brand>
-                        <img src={"./logo.png"} width={50} height={50} alt={"logo"}/>
+                        <img src={"../logo.png"} width={50} height={50} alt={"logo"}/>
                     </Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link href="/">Choose Movies</Nav.Link>
                         <Nav.Link href="/cart">Shopping Cart</Nav.Link>
-                        <Nav.Link href="/checkout">Checkout</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

@@ -21,7 +21,6 @@ export default function ShoppingCartTable({cart, setCart}) {
             <tbody className={"align-middle"}>
             {cart.map((item) => (
                 <CartItem key={item.id} item={item} deleteItem={deleteItem}/>
-
             ))}
             </tbody>
         </Table>
