@@ -1,4 +1,5 @@
 import {Button, ListGroup} from "react-bootstrap";
+import {CURRENCY} from "../constants";
 
 
 export default function CheckoutDetails({cartItems}) {
@@ -13,19 +14,19 @@ export default function CheckoutDetails({cartItems}) {
                 <ListGroup.Item>
                     <span className={"row"}>
                         <p className={"col-9"}>Subtotal:</p>
-                        <p className={"col"}>{subtotal.toFixed(2)}</p>
+                        <p className={"col"}>{subtotal.toFixed(2) + CURRENCY}</p>
                     </span>
                 </ListGroup.Item>
                 <ListGroup.Item>
                     <span className={"row"}>
                         <p className={"col-9"}>Tax::</p>
-                        <p className={"col"}>{tax.toFixed(2)}</p>
+                        <p className={"col"}>{tax.toFixed(2) + CURRENCY}</p>
                     </span>
                 </ListGroup.Item>
                 <ListGroup.Item>
                     <span className={"row"}>
                         <p className={"col-9"}>Total:</p>
-                        <p className={"col"}>{total.toFixed(2)}</p>
+                        <p className={"col"}>{total.toFixed(2) + CURRENCY}</p>
                     </span>
                 </ListGroup.Item>
                 <ListGroup.Item><Button variant="success">Checkout</Button></ListGroup.Item>
