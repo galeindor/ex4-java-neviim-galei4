@@ -1,5 +1,4 @@
 import {Col, Container, Row} from "react-bootstrap";
-import MediaSection from "../MediaSection"; // TODO: check if needed
 import SearchBar from "../SearchBar";
 import MediaList from "../MediaList";
 import MediaReducer from "../../reducers/MediaReducer";
@@ -9,7 +8,7 @@ import axios from "axios";
 import Message from "../Message";
 
 export default function HomePage() {
-    const [media, dispatch] = useReducer(MediaReducer, []);
+    const [media, dispatch] = useReducer(MediaReducer, [], () => {});
     const [message, setMessage] = useState('');
     const [isEmpty, setIsEmpty] = useState(true);
 

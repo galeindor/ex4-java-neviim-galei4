@@ -1,7 +1,4 @@
-/*this.email = email;
-this.payment = total;
-this.firstName = firstName;
-this.lastName = lastName;*/
+
 import {Button, Container, FloatingLabel, Form, Row} from "react-bootstrap";
 import {redirect, useParams} from "react-router-dom";
 import axios from "axios";
@@ -9,14 +6,10 @@ import {CURRENCY, REST_API_CHECKOUT_URL} from "../../constants";
 
 export default function CheckoutPage() {
     const {total} = useParams();
-
     async function onSubmit(e) {
-        console.log("onSubmit");
         e.preventDefault();
-
         const data = new URLSearchParams();
         const formData = new FormData(e.target);
-        console.log(data);
         for (const pair of formData.entries()) {
             data.append(pair[0].toString(), pair[1]);
         }
@@ -30,7 +23,7 @@ export default function CheckoutPage() {
         console.log(response);
         if(response.status === 200) {
             console.log("CheckoutPage: onSubmit: response.status === 200");
-            redirect("/");
+            return redirect("/");
         }
     }
 
@@ -53,7 +46,7 @@ export default function CheckoutPage() {
                     </FloatingLabel>
 
                     <FloatingLabel label="Total" className="mb-3">
-                        <Form.Control type="text" defaultValue={total+CURRENCY} muted/>
+                        <Form.Control type="text" defaultValue={total+CURRENCY} disabled/>
                     </FloatingLabel>
 
                     <Button variant="primary" type="submit">Submit</Button>

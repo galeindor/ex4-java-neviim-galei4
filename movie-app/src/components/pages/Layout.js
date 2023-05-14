@@ -15,13 +15,6 @@ export default function Layout() {
                     </Nav>
                 </Container>
             </Navbar>
-        {/*<Navbar bg="dark" variant="dark">
-            <Container>
-                <Navbar.Brand href="/">Choose Movies</Navbar.Brand>
-                <Navbar.Brand href="/cart">Shopping Cart</Navbar.Brand>
-
-            </Container>
-        </Navbar>*/}
         <Outlet />
         </>
     )
