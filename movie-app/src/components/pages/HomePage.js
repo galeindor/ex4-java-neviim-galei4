@@ -10,16 +10,17 @@ import Message from "../Message";
 export default function HomePage() {
     const [media, dispatch] = useReducer(MediaReducer, [], () => {});
     const [message, setMessage] = useState('');
-    const [isEmpty, setIsEmpty] = useState(true);
 
     const setMedia = async (data) => {
         setMessage('Search Results');
-        setIsEmpty( (data.length === 0));
         dispatch({type: 'RESET', payload: data});
         for (const item of data) {
             dispatch({type: item.media_type.toUpperCase(), payload: item});
         }
+        if(data.length === 0)
+            setMessage("No Results");
     }
+
 
     useEffect(() => {
         const fetchTrending = async () => {
@@ -34,9 +35,8 @@ export default function HomePage() {
                 console.log(e);
             }
         }
-        if(isEmpty)
-            fetchTrending();
-    }, [isEmpty]);
+        fetchTrending();
+    }, []);
 
     return (
         <Container>
