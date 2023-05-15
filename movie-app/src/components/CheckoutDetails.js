@@ -31,7 +31,7 @@ export default function CheckoutDetails({cartItems}) {
                     </span>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                    <Link to={`/checkout/${total.toFixed(2)}`}>
+                    <Link to={"/checkout"}>
                         <Button variant="success">Checkout</Button>
                     </Link>
                 </ListGroup.Item>

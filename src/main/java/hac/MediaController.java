@@ -4,7 +4,9 @@ import hac.product.Product;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/media")
@@ -37,4 +39,22 @@ public class MediaController {
         }
         return false;
     }
+
+    @GetMapping("/total")
+    public Map<String, Double> getTotal() {
+        double total = 0;
+        double tax = 0;
+        double subTotal = 0;
+        for (Product p : products) {
+            subTotal += p.getPrice();
+            tax += p.getTax();
+            total += p.getPrice() + p.getTax();
+        }
+        Map<String, Double> result = new HashMap<>();
+        result.put("total", total);
+        result.put("tax", tax);
+        result.put("subTotal", subTotal);
+        return result;
+    }
+
 }

@@ -11,6 +11,8 @@ public class Product implements Serializable {
     private String name;
     private String description;
     private Float price;
+
+    private Float tax = 0.0f;
     private String posterUrl;
 
     public Product(int id,String name, String description, String posterUrl, Float price) {
@@ -18,6 +20,7 @@ public class Product implements Serializable {
         this.description = description;
         this.posterUrl = posterUrl;
         this.price = price;
+        this.tax = price * 0.1f;
         this.id = id;
     }
 
@@ -63,5 +66,13 @@ public class Product implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Float getTax() {
+        return this.tax;
+    }
+
+    public void setTax(Float tax) {
+        this.tax = tax;
     }
 }
