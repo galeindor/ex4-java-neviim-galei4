@@ -6,7 +6,7 @@ export default function SearchFiltersReducer(filters, action) {
         case 'RELEASE_YEAR':
             return {...filters, release_year: action.payload, discover: true};
         case 'WITH_GENRES':
-            return {...filters, with_genres: action.payload, discover: true};
+            return {...filters, with_genres: action.payload , discover: true};
         case 'WITH_KEYWORDS':
             return {...filters, with_keywords: action.payload, discover: true};
         default:

@@ -8,22 +8,20 @@ import SearchFiltersReducer from "../reducers/SearchFiltersReducer";
 
 
 export default function SearchBar({setMedia}) {
-
+    const initialSearchFilters = {
+        media_type: "multi",
+        discover: false,
+    };
     const [searchHistory, setSearchHistory] = useState([]);
     const [currentSearch, setCurrentSearch] = useState("");
-    const [searchFilters, dispatch] = useReducer(SearchFiltersReducer, {media_type: "multi", discover: false}, () => {
-        const localData = localStorage.getItem('searchFilters');
-        return localData ? JSON.parse(localData) : {media_type: "multi", discover: false};
-    });
+    const [searchFilters, dispatch] = useReducer(SearchFiltersReducer, initialSearchFilters, () => initialSearchFilters);
     const search_url = "<TMDB_BASE_URL>/<is_search>/<media_type>?api_key=<api_key>&query=<query>&include_adult=false";
 
-    async function onSubmit(e) {
-        const value = e.target[1].value
+    async function onSubmit(value) {
         setCurrentSearch(value);
         if (!searchHistory.includes(value)) { // if the search history does not include the current search
             setSearchHistory([...searchHistory, value]);
         }
-        e.preventDefault();
         const url = createUrl();
         try {
             const response = await axios.get(url);
@@ -41,7 +39,7 @@ export default function SearchBar({setMedia}) {
     }
 
     function createUrl() {
-
+        console.log(searchFilters);
         let url = search_url
             .replace("<TMDB_BASE_URL>", TMDB_BASE_URL)
             .replace("<api_key>", TMDB_API_KEY)
@@ -54,11 +52,11 @@ export default function SearchBar({setMedia}) {
                 url += "&primary_release_year=" + searchFilters.release_year;
             }
 
-            if (searchFilters.with_genres.length > 0) {
+            if (searchFilters.with_genres && searchFilters.with_genres.length > 0) {
                 url += "&with_genres=" + searchFilters.with_genres.join(",");
             }
 
-            if (searchFilters.with_keywords.length > 0) {
+            if (searchFilters.with_keywords && searchFilters.with_keywords.length > 0) {
                 url += "&with_keywords=" + searchFilters.with_keywords.join(",");
             }
         }
@@ -79,9 +77,16 @@ export default function SearchBar({setMedia}) {
 
 
     return (
-        <Form className={"mt-2"} onSubmit={onSubmit}>
+        <Form className={"mt-2"} onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(currentSearch);
+        }}>
             <InputGroup className="m-2">
-                <SearchFilter searchFilters={searchFilters} dispatchFilters={dispatch}/>
+                <SearchFilter dispatchFilters={dispatch}
+                              setCurrentSearch={setCurrentSearch}
+                              currentSearch={currentSearch}
+                              onSubmit={onSubmit}
+                />
                 <Form.Control onInput={(e) => setCurrentSearch(e.target.value)}
                               type="text"
                               autoComplete={"off"}
