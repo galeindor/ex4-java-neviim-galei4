@@ -9,8 +9,7 @@ import SearchFiltersReducer from "../reducers/SearchFiltersReducer";
 
 export default function SearchBar({setMedia}) {
     const initialSearchFilters = {
-        media_type: "multi",
-        discover: false,
+        media_type: "multi", discover: false, release_year: "", with_genres: []
     };
     const [searchHistory, setSearchHistory] = useState([]);
     const [currentSearch, setCurrentSearch] = useState("");
@@ -55,11 +54,8 @@ export default function SearchBar({setMedia}) {
             if (searchFilters.with_genres && searchFilters.with_genres.length > 0) {
                 url += "&with_genres=" + searchFilters.with_genres.join(",");
             }
-
-            if (searchFilters.with_keywords && searchFilters.with_keywords.length > 0) {
-                url += "&with_keywords=" + searchFilters.with_keywords.join(",");
-            }
         }
+
 
         return url;
 
@@ -76,29 +72,28 @@ export default function SearchBar({setMedia}) {
     }
 
 
-    return (
-        <Form className={"mt-2"} onSubmit={(e) => {
-            e.preventDefault();
-            onSubmit(currentSearch);
-        }}>
-            <InputGroup className="m-2">
-                <SearchFilter dispatchFilters={dispatch}
-                              setCurrentSearch={setCurrentSearch}
-                              currentSearch={currentSearch}
-                              onSubmit={onSubmit}
-                />
-                <Form.Control onInput={(e) => setCurrentSearch(e.target.value)}
-                              type="text"
-                              autoComplete={"off"}
-                              name={"search"}
-                              value={currentSearch}
-                              placeholder="Search for a item"
-                              aria-label="Search for a item"
-                              aria-describedby="item-search"
-                />
-                <Button variant="outline-secondary" type="submit">Submit</Button>
-            </InputGroup>
-            <SearchHistory history={searchHistory} currentSearch={currentSearch} setCurrentSearch={setCurrentSearch}/>
-        </Form>
-    )
+    return (<Form className={"mt-2"} onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(currentSearch);
+    }}>
+        <InputGroup className="m-2">
+            <SearchFilter searchFilters={searchFilters}
+                          dispatchFilters={dispatch}
+                          setCurrentSearch={setCurrentSearch}
+                          currentSearch={currentSearch}
+                          onSubmit={onSubmit}
+            />
+            <Form.Control onInput={(e) => setCurrentSearch(e.target.value)}
+                          type="text"
+                          autoComplete={"off"}
+                          name={"search"}
+                          value={currentSearch}
+                          placeholder="Search for a item"
+                          aria-label="Search for a item"
+                          aria-describedby="item-search"
+            />
+            <Button variant="outline-secondary" type="submit">Submit</Button>
+        </InputGroup>
+        <SearchHistory history={searchHistory} currentSearch={currentSearch} setCurrentSearch={setCurrentSearch}/>
+    </Form>)
 }

@@ -8,6 +8,7 @@ import {REST_API_URL} from "../../constants";
 export default function ShoppingCartPage() {
     const [cart, setCart] = useState([]);
     const [message, setMessage] = useState("");
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -18,10 +19,20 @@ export default function ShoppingCartPage() {
 
         }
         fetchCart().catch((e) => {
-            setMessage("Error fetching cart , please try again later"); // if there is an error, cart is empty
+            setError("Error fetching cart , please try again later"); // if there is an error, cart is empty
             console.log(e);
         });
     }, []);
+
+    const emptyCart = () => {
+        axios.delete(REST_API_URL).then(() => {
+            setCart([]);
+            setMessage("Your cart is empty, Go Shop! Please =)");
+        }).catch((e) => {
+            setError("Error emptying cart , please try again later");
+            console.log(e);
+        });
+    }
 
     return (
         <Container>
@@ -29,6 +40,11 @@ export default function ShoppingCartPage() {
                 {message &&
                     <h2 className="text-center mt-3 text-secondary">{message}</h2>
                 }
+                {error &&
+                    <h2 className="text-center mt-3 text-danger">{message}</h2>
+                }
+            </Row>
+            <Row>
                 {!message && (
                     <>
                         <div className={"col-md-9"}>
@@ -36,6 +52,7 @@ export default function ShoppingCartPage() {
                         </div>
                         <Col>
                             <CheckoutDetails cartItems={cart}/>
+                            <button className="btn btn-outline-danger mt-3" onClick={emptyCart}>Empty Cart</button>
                         </Col>
                     </>
                 )

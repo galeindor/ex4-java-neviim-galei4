@@ -2,6 +2,8 @@ package hac;
 
 import hac.product.Product;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -56,5 +58,15 @@ public class MediaController {
         result.put("subTotal", subTotal);
         return result;
     }
+
+    @DeleteMapping("/")
+    public String clearSession(HttpServletRequest request) {
+        // destroy session
+        HttpSession session = request.getSession();
+        session.invalidate(); // destroy session
+        products.clear();
+        return "Session cleared";
+    }
+
 
 }
