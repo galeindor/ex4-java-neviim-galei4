@@ -1,17 +1,36 @@
-import {Container, Nav, Navbar} from "react-bootstrap";
+import {Badge, Container, Nav, Navbar} from "react-bootstrap";
 import { Outlet } from "react-router-dom";
+import {useContext, useEffect, useState} from "react";
+import {CartContext} from "../../CartContext";
 
 export default function Layout() {
+    const [cart, setCart] = useContext(CartContext);
+    const [length, setLength] = useState(0);
+
+    useEffect(() => {
+        console.log("cart changed" , cart);
+        setLength(cart.length);
+    }, [cart]);
+
     return (
         <>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="secondary" variant={"light"}>
                 <Container fluid={true}>
                     <Navbar.Brand>
-                        <img src={"../logo.png"} width={50} height={50} alt={"logo"}/>
+                        <img src={"../logo.png"} width={60} height={60} alt={"logo"}/>
                     </Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Choose Movies</Nav.Link>
-                        <Nav.Link href="/cart">Shopping Cart</Nav.Link>
+                        <Nav.Link href="/">
+                            <Badge pill bg={"secondary"}>
+                                <img src={"../icons/home.png"} width={40} height={40} alt={"home"}/>
+                            </Badge>
+                        </Nav.Link>
+                        <Nav.Link href="/cart">
+                            <Badge pill bg={"secondary"}>
+                                <img src={"../icons/cart.png"} width={40} height={40} alt={"cart"}/>
+                                <span>{length}</span>
+                            </Badge>
+                        </Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

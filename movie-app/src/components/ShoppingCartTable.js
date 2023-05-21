@@ -1,8 +1,10 @@
 import CartItem from "./CartItem";
 import {Table} from "react-bootstrap";
+import {useContext} from "react";
+import {CartContext} from "../CartContext";
 
-export default function ShoppingCartTable({cart, setCart}) {
-
+export default function ShoppingCartTable() {
+    const [cart, setCart] = useContext(CartContext);
     function deleteItem(id) {
         const newCart = cart.filter((item) => item.id !== id);
         setCart(newCart);

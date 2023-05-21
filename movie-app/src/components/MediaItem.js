@@ -1,10 +1,12 @@
 import {Card, Col, Modal, Row, Toast, ToastContainer} from "react-bootstrap";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {cartConstants, ITEM_FIXED_PRICE, REST_API_URL, TMDB_IMAGE_BASE_URL} from "../constants";
+import {CartContext} from "../CartContext";
 
 export default function MediaItem({item}) {
 
+    const [cart, setCart] = useContext(CartContext)
     const posterPath = `${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`;
     const img_url = item.poster_path ? posterPath : './default.png';
     const [isHovered, setIsHovered] = useState(false);
@@ -26,8 +28,9 @@ export default function MediaItem({item}) {
                     }
                 });
             const success = await response.data;
-            console.log(success);
             setMessage(success ? cartConstants.ADD_SUCCESS : cartConstants.ADD_FAILURE)
+            if(success) // add to cart only if success
+                setCart([...cart, data]);
         } catch (e) {
             setMessage(cartConstants.ADD_ERROR);
             console.log(e);
