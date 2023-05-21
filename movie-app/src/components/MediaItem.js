@@ -1,7 +1,7 @@
 import {Card, Col, Modal, Row, Toast, ToastContainer} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {cartConsts, ITEM_FIXED_PRICE, REST_API_URL, TMDB_IMAGE_BASE_URL} from "../constants";
+import {cartConstants, ITEM_FIXED_PRICE, REST_API_URL, TMDB_IMAGE_BASE_URL} from "../constants";
 
 export default function MediaItem({item}) {
 
@@ -20,18 +20,22 @@ export default function MediaItem({item}) {
             "price": ITEM_FIXED_PRICE
         };
         try {
-            const response = await axios.post(REST_API_URL, data);
+            const response = await axios.post(REST_API_URL, data, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                });
             const success = await response.data;
             console.log(success);
-            setMessage(success ? cartConsts.ADD_SUCCESS : cartConsts.ADD_FAILURE)
+            setMessage(success ? cartConstants.ADD_SUCCESS : cartConstants.ADD_FAILURE)
         } catch (e) {
-            setMessage(cartConsts.ADD_ERROR);
+            setMessage(cartConstants.ADD_ERROR);
             console.log(e);
         }
     }
 
     useEffect(() => {
-        setSuccess(message === cartConsts.ADD_SUCCESS )
+        setSuccess(message === cartConstants.ADD_SUCCESS )
         if (message !== "") {
             const timer = setTimeout(() => {
                 setMessage("");

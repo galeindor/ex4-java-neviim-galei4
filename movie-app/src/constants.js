@@ -6,10 +6,10 @@ export const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
 
 export const REST_API_URL = 'http://localhost:3000/media/';
 
-export const REST_API_CHECKOUT_URL = 'http://localhost:3000/debug/purchases';
+export const REST_API_CHECKOUT_URL = 'http://localhost:3000/purchases/';
 export const ITEM_FIXED_PRICE = 3.99;
 
-export const cartConsts = {
+export const cartConstants = {
     ADD_SUCCESS: "Item added to cart",
     ADD_FAILURE: "Item already in cart",
     ADD_ERROR: "Problem saving item to cart, Please try again",

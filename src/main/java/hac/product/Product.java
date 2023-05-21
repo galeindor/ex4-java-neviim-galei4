@@ -1,18 +1,29 @@
 package hac.product;
 
+import jakarta.persistence.Id;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 
 @Component
 public class Product implements Serializable {
-
+    @Id
     private int id;
+
+    @NotEmpty(message = "Product name is mandatory")
     private String name;
+
+    @NotEmpty(message = "Product description is mandatory")
     private String description;
+
+    @PositiveOrZero(message = "Product price must be positive or zero")
     private Float price;
 
+    @PositiveOrZero(message = "Product tax must be positive or zero")
     private Float tax = 0.0f;
+
     private String posterUrl;
 
     public Product(int id,String name, String description, String posterUrl, Float price) {

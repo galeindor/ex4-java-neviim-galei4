@@ -4,8 +4,10 @@ import hac.product.Product;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,7 @@ public class MediaController {
     }
 
     @PostMapping("/")
-    public boolean addProduct(@RequestBody Product product) {
+    public boolean addProduct(Product product) {
         for (Product p : products) {
             if (p.getId() == product.getId()) { // product already exists
                 return false;
@@ -68,5 +70,9 @@ public class MediaController {
         return "Session cleared";
     }
 
+    @GetMapping("/count")
+    public int count() {
+        return products.size();
+    }
 
 }
