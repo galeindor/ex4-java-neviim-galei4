@@ -94,6 +94,8 @@ export default function SearchBar({setMedia}) {
             />
             <Button variant="outline-secondary" type="submit">Submit</Button>
         </InputGroup>
-        <SearchHistory history={searchHistory} currentSearch={currentSearch} setCurrentSearch={setCurrentSearch}/>
+        <SearchHistory history={searchHistory}
+                       setHistory = {setSearchHistory}
+                       currentSearch={currentSearch} setCurrentSearch={setCurrentSearch}/>
     </Form>)
 }

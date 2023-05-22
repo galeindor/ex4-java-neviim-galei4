@@ -1,6 +1,6 @@
-import {ListGroup} from "react-bootstrap";
+import {Button, ListGroup} from "react-bootstrap";
 
-export default function SearchHistory({history, currentSearch, setCurrentSearch}) {
+export default function SearchHistory({history, setHistory, currentSearch, setCurrentSearch}) {
 
     const hover = (event) => {
         event.target.setAttribute("style", "background-color: #e9ecef")
@@ -14,9 +14,17 @@ export default function SearchHistory({history, currentSearch, setCurrentSearch}
         console.log(text);
         setCurrentSearch(text);
     }
+
+    const removeFromHistory = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log(event.target.parentElement.innerText);
+        const text = event.target.parentElement.innerText;
+        setHistory(history.filter(item => item !== text));
+    }
     return (
         <ListGroup as="ul">
-            {history.map((item, index) => {
+            {Array.isArray(history) && history.map((item, index) => {
                 if (item.startsWith(currentSearch) && item !== currentSearch) {
                     return (
                         <ListGroup.Item
@@ -28,6 +36,8 @@ export default function SearchHistory({history, currentSearch, setCurrentSearch}
                             onMouseLeave={unhover}
                         >
                             {item}
+                            <Button type={"button"} className={"btn-close float-end"} onClick={removeFromHistory}
+                                    aria-label={"Close"}/>
                         </ListGroup.Item>
                     )
                 }
