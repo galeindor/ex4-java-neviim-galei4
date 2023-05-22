@@ -23,7 +23,7 @@ public class MediaController {
     }
 
     @PostMapping("/")
-    public boolean addProduct(Product product) {
+    public boolean addProduct(@RequestBody Product product) {
         for (Product p : products) {
             if (p.getId() == product.getId()) { // product already exists
                 return false;
