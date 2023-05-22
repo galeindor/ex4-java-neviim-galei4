@@ -3,8 +3,8 @@ package hac.product;
 import jakarta.persistence.Id;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 
 @Component

@@ -16,12 +16,12 @@ export default function SearchBar({setMedia}) {
     const [searchFilters, dispatch] = useReducer(SearchFiltersReducer, initialSearchFilters, () => initialSearchFilters);
     const search_url = "<TMDB_BASE_URL>/<is_search>/<media_type>?api_key=<api_key>&query=<query>&include_adult=false";
 
-    async function onSubmit(value) {
+    async function onSubmit(value, isComplexSearch = false) {
         setCurrentSearch(value);
         if (!searchHistory.includes(value)) { // if the search history does not include the current search
             setSearchHistory([...searchHistory, value]);
         }
-        const url = createUrl();
+        const url = createUrl(isComplexSearch);
         try {
             const response = await axios.get(url);
             const data = response.data;
@@ -37,14 +37,22 @@ export default function SearchBar({setMedia}) {
         }
     }
 
-    function createUrl() {
+    function createUrl(isComplexSearch) {
         console.log(searchFilters);
         let url = search_url
             .replace("<TMDB_BASE_URL>", TMDB_BASE_URL)
             .replace("<api_key>", TMDB_API_KEY)
-            .replace("<query>", currentSearch)
-            .replace("<media_type>", searchFilters.media_type)
-            .replace("<is_search>", searchFilters.discover ? "discover" : "search")
+            .replace("<query>", currentSearch);
+
+        if (!isComplexSearch) {
+            return url
+                .replace("<media_type>", "multi")
+                .replace("<is_search>", "search");
+        }
+
+        const mediaType = searchFilters.media_type;
+        const isSearch = searchFilters.discover ? "discover" : "search";
+        url = url.replace("<media_type>", mediaType).replace("<is_search>", isSearch);
 
         if (searchFilters.discover) {
             if (searchFilters.release_year !== "") {

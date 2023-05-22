@@ -40,20 +40,22 @@ export default function CheckoutPage() {
     async function onSubmit(e) {
         try {
             e.preventDefault();
-            const data = new URLSearchParams();
-            const formData = new FormData(e.target);
-            for (const pair of formData.entries()) {
-                data.append(pair[0].toString(), pair[1]);
+            const data = {
+                email: e.target.email.value,
+                firstName: e.target.firstName.value,
+                lastName: e.target.lastName.value,
+                payment: total
             }
-            data.append("payment", parseFloat(total));
+            console.log(data);
             if(!validateForm(data)) {
                 return;
             }
             setIsLoading(true);
             const response = await axios.post(REST_API_CHECKOUT_URL, data, {
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                }
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             })
             if (response.status === 200) {
                 await emptyCart();
@@ -86,13 +88,13 @@ export default function CheckoutPage() {
 
     function validateForm(data) {
         let errorList = {};
-        if(!validateEmail(data.get("email"))) {
+        if(!validateEmail(data.email)) {
             errorList["email"] = "Invalid email";
         }
-        if(!validateName(data.get("firstName"))) {
+        if(!validateName(data.firstName)) {
             errorList["firstName"] = "Invalid first name";
         }
-        if(!validateName(data.get("lastName"))) {
+        if(!validateName(data.lastName)) {
             errorList["lastName"] = "Invalid last name";
         }
         setErrors(errorList);
@@ -121,7 +123,7 @@ export default function CheckoutPage() {
                     </FloatingLabel>
 
                     <FloatingLabel label="Total" className="mb-3">
-                        <Form.Control type="text" value={total + CURRENCY} disabled/>
+                        <Form.Control type="text" value={total + CURRENCY} name={"payment"} muted/>
                     </FloatingLabel>
 
                     <Button variant="primary" type="submit">Submit</Button>

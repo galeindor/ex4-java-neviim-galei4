@@ -59,7 +59,6 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
 
     useEffect(() => {
         console.log(searchFilters);
-        console.log(genreIds);
         if (searchFilters.media_type === "movie") {
             setGenresOptions(genres.movie_genres);
             // remove tv genres from genreIds
@@ -91,7 +90,7 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
                         <Form onSubmit={(e) => {
                             e.preventDefault();
                             setGenreIds([])
-                            onSubmit(e.target[0].value)
+                            onSubmit(e.target[0].value, true) // search with filters
                             handleClose();
                         }}>
 
