@@ -4,9 +4,9 @@ import {Row} from "react-bootstrap";
 export default function MediaList({media}) {
     return (
         <Row>
-            {media && media.map(item => {
+            {Array.isArray(media) && media.map(item => {
                     return (
-                        <div key={item.id} className={"col-12 col-sm-5 col-md-3 col-lg-2 m-1"}>
+                        <div key={item.id} className={"col-12 col-sm-6 col-md-4 col-lg-3 p-3"}>
                             <MediaItem item={item}/>
                         </div>
                     )

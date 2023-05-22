@@ -8,7 +8,6 @@ export default function Layout() {
     const [length, setLength] = useState(0);
 
     useEffect(() => {
-        console.log("cart changed" , cart);
         setLength(cart.length);
     }, [cart]);
 
@@ -22,7 +21,7 @@ export default function Layout() {
                     <Nav className="me-auto">
                         <Nav.Link href="/">
                             <Badge pill bg={"secondary"}>
-                                <img src={"../icons/home.png"} width={40} height={40} alt={"home"}/>
+                                <img src={"../icons/movie.png"} width={40} height={40} alt={"home"}/>
                             </Badge>
                         </Nav.Link>
                         <Nav.Link href="/cart">

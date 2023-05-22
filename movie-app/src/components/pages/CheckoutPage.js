@@ -51,7 +51,6 @@ export default function CheckoutPage() {
                 await emptyCart();
             }
             if (response.status === 200) {
-                console.log("CheckoutPage: onSubmit: response.status === 200");
                 window.location.href = "/";
             }
 
