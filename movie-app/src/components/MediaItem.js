@@ -14,7 +14,7 @@ export default function MediaItem({item}) {
     const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const addToCart = async () => {
-        const data = {
+        const itemData = {
             "id": item.id,
             "name": item.name,
             "posterUrl": posterPath,
@@ -22,15 +22,18 @@ export default function MediaItem({item}) {
             "price": ITEM_FIXED_PRICE
         };
         try {
-            const response = await axios.post(REST_API_URL, data, {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    }
-                });
+            const response = await axios.post(
+                REST_API_URL,
+                JSON.stringify(itemData),
+                {
+                    headers: {'Content-Type': 'application/json'}
+                }
+            );
+
             const success = await response.data;
             setMessage(success ? cartConstants.ADD_SUCCESS : cartConstants.ADD_FAILURE)
             if(success) // add to cart only if success
-                setCart([...cart, data]);
+                setCart([...cart, itemData]);
         } catch (e) {
             setMessage(cartConstants.ADD_ERROR);
             console.log(e);
