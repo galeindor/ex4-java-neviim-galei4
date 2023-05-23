@@ -10,7 +10,7 @@ export default function CartItem({item, deleteItem, showErrors}) {
     }
 
     useEffect(() => {
-        if (errors.length > 0) {
+        if (errors && errors.length > 0) {
             return showErrors(errors);
         }
         if (data === true) // data is true when the item is deleted

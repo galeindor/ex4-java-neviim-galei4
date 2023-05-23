@@ -9,6 +9,12 @@ export const useFetch = (initialData) => {
     const [method, setMethod] = useState("get");
     const [body, setBody] = useState({});
 
+    function setValues(url, method, body = {}) {
+        setUrl(url);
+        setMethod(method);
+        setBody(body);
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             if (!url) {
@@ -21,7 +27,7 @@ export const useFetch = (initialData) => {
                 console.log(result);
                 setData(result.data);
             } catch (error) {
-                console.log(error.response);
+                setUrl("") // reset url to empty string to allow refetching the same url in case of error
                 setErrors({
                     message: error.message,
                     status: error.response.status,
@@ -35,7 +41,7 @@ export const useFetch = (initialData) => {
         async function doAxios() {
             switch (method) {
                 case 'post' || 'put':
-                    return axios({url, method, body, headers: {'Content-Type': 'application/json'}});
+                    return axios({url, method, data: body, headers: {'Content-Type': 'application/json'}});
                 default:
                     return axios({url, method});
             }
@@ -43,7 +49,7 @@ export const useFetch = (initialData) => {
 
         fetchData(); // execute the function above
 
-    }, [url]);
+    }, [url, method, body]); // trigger the effect when url changes
 
     /**
      * function to set the values of the hook (url, method, body)
@@ -52,11 +58,6 @@ export const useFetch = (initialData) => {
      * @param method
      * @param body
      */
-    const setValues = (url, method, body = {}) => {
-        setUrl(url);
-        setMethod(method);
-        setBody(body);
-    }
 
     return [{data, isLoading, errors}, setValues]; // return the data and the URL setter function
 };
