@@ -7,7 +7,7 @@ import {CartContext} from "../../CartContext";
 import LoadingSpinner from "../LoadingSpinner";
 import {useFetch} from "../../customHooks/useFetch";
 export default function ShoppingCartPage() {
-    const [{data, isLoading, errors}, doFetch] = useFetch({data: [], isLoading: true, error: ""});
+    const [{data, isLoading, errors}, doFetch] = useFetch(false);
     const [cart, setCart] = useContext(CartContext);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
