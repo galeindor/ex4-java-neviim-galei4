@@ -5,9 +5,12 @@ import SearchHistory from "./SearchHistory";
 import {useReducer, useState} from "react";
 import SearchFilter from "./SearchFilter";
 import SearchFiltersReducer from "../reducers/SearchFiltersReducer";
+import {useFetch} from "../customHooks/useFetch";
 
 
 export default function SearchBar({setMedia}) {
+
+    const [{data, isLoading, isError}, doFetch] = useFetch({})
     const initialSearchFilters = {
         media_type: "multi", discover: false, release_year: "", with_genres: []
     };
