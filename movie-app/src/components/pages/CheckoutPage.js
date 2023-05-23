@@ -123,7 +123,7 @@ export default function CheckoutPage() {
                     </FloatingLabel>
 
                     <FloatingLabel label="Total" className="mb-3">
-                        <Form.Control type="text" value={total + CURRENCY} name={"payment"} muted/>
+                        <Form.Control type="text" value={total + CURRENCY} name={"payment"} disabled/>
                     </FloatingLabel>
 
                     <Button variant="primary" type="submit">Submit</Button>
