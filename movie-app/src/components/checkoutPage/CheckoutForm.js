@@ -1,5 +1,5 @@
 import {Button, FloatingLabel, Form} from "react-bootstrap";
-import {CURRENCY, REST_API_CHECKOUT_URL} from "../../constants";
+import {CURRENCY, formErrors, REST_API_CHECKOUT_URL} from "../../constants";
 import {useFetch} from "../../customHooks/useFetch";
 import {useEffect, useState} from "react";
 import LoadingSpinner from "../LoadingSpinner";
@@ -9,24 +9,18 @@ export default function CheckoutForm({total, emptyCart}) {
     const [fieldErrors, setFieldErrors] = useState({email: '', firstName: '', lastName: '', error: ''});
 
     async function onSubmit(e) {
-            e.preventDefault();
-            const data = {
-                email: e.target.email.value,
-                firstName: e.target.firstName.value,
-                lastName: e.target.lastName.value,
-                payment: total
-            }
-            console.log(data);
-            if (!validateForm(data)) {
-                return;
-            }
-            doFetch(REST_API_CHECKOUT_URL, "post", data);
-            /*const response = await axios.post(REST_API_CHECKOUT_URL, data, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })*/
+        e.preventDefault();
+        const data = {
+            email: e.target.email.value,
+            firstName: e.target.firstName.value,
+            lastName: e.target.lastName.value,
+            payment: total
+        }
+        console.log(data);
+        if (!validateForm(data)) {
+            return;
+        }
+        doFetch(REST_API_CHECKOUT_URL, "post", data);
     }
 
     useEffect(() => {
@@ -38,8 +32,7 @@ export default function CheckoutForm({total, emptyCart}) {
             }
         }
         if (data) {
-            emptyCart();
-            window.location.href = "/";
+            emptyCart(); // empty cart if checkout is successful
         }
     }, [data]);
 
@@ -54,14 +47,17 @@ export default function CheckoutForm({total, emptyCart}) {
 
     function validateForm(data) {
         let errorList = {};
+        if (!data.email || !data.firstName || !data.lastName) {
+            errorList["error"] = formErrors.EMPTY;
+        }
         if (!validateEmail(data.email)) {
-            errorList["email"] = "Invalid email";
+            errorList["email"] = formErrors.INVALID_EMAIL;
         }
         if (!validateName(data.firstName)) {
-            errorList["firstName"] = "Invalid first name";
+            errorList["firstName"] = formErrors.INVALID_FIRST_NAME;
         }
         if (!validateName(data.lastName)) {
-            errorList["lastName"] = "Invalid last name";
+            errorList["lastName"] = formErrors.INVALID_LAST_NAME;
         }
         setFieldErrors(errorList);
         return Object.keys(errorList).length === 0;

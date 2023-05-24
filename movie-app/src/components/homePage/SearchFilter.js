@@ -1,6 +1,6 @@
 import {Button, Container, Form, Offcanvas, Row} from "react-bootstrap";
 import {useEffect, useState} from "react";
-import {TMDB_API_KEY, TMDB_BASE_URL} from "../../constants";
+import {BG_COLOR, mediaTypes, TMDB_API_KEY, TMDB_BASE_URL} from "../../constants";
 
 export default function SearchFilter({searchFilters, dispatchFilters, setCurrentSearch, currentSearch, onSubmit}) {
     const [show, setShow] = useState(false);
@@ -81,7 +81,7 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
         <>
             <img src={"./icons/filter.png"} height={"30"} className={"mt-1"} onClick={handleShow} alt={"filterIcon"}/>
 
-            <Offcanvas show={show} onHide={handleClose} scroll={true}>
+            <Offcanvas show={show} onHide={handleClose} scroll={true} style={{backgroundColor: BG_COLOR}}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Search Filters</Offcanvas.Title>
                 </Offcanvas.Header>
@@ -108,13 +108,13 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
                                 <Form.Select className={"col mb-3"} onChange={setMediaType} id={"media_type"}>
                                     {!searchFilters.discover &&
                                         <option defaultChecked={searchFilters.media_type === "multi"}
-                                                value={"multi"}>All</option>
+                                                value={mediaTypes.ALL}>All</option>
                                     }
                                     <option defaultChecked={searchFilters.media_type === "movie"}
-                                            value={"movie"}>Movies
+                                            value={mediaTypes.MOVIE}>Movies
                                     </option>
                                     <option defaultChecked={searchFilters.media_type === "tv"}
-                                            value={"tv"}>TV Shows
+                                            value={mediaTypes.TV}>TV Shows
                                     </option>
                                 </Form.Select>
                             </Row> {/*media type*/}

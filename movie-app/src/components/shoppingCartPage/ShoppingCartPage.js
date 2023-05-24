@@ -51,9 +51,7 @@ export default function ShoppingCartPage() {
                                     <ShoppingCartTable/>
                                 </div>
                                 <Col>
-                                    <CheckoutDetails cartItems={cart}/>
-                                    <button className="btn btn-outline-danger mt-3" onClick={emptyCart}>Empty Cart
-                                    </button>
+                                    <CheckoutDetails cartItems={cart} emptyCart={emptyCart}/>
                                 </Col>
                             </>
                         )

@@ -4,9 +4,11 @@ import {REST_API_URL} from "../../constants";
 import {useEffect, useState} from "react";
 import LoadingSpinner from "../LoadingSpinner";
 import CheckoutForm from "./CheckoutForm";
+import {useFetch} from "../../customHooks/useFetch";
 
 export default function CheckoutPage() {
     const [total, setTotal] = useState(1)
+    const [{data, isLoading, errors}, doFetch] = useFetch(false);
     const [error,setError] = useState({message: ''});
 
     useEffect(() => {
@@ -22,7 +24,6 @@ export default function CheckoutPage() {
     async function emptyCart() {
         try {
             const response = await axios.delete(REST_API_URL);
-            console.log(response);
             if (response.status === 200) {
                 window.location.href = "/";
             }
