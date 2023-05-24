@@ -1,7 +1,7 @@
 import {Badge, Container, Nav, Navbar} from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
-import {CartContext} from "../../CartContext";
+import {CartContext} from "../CartContext";
 
 export default function Layout() {
     const [cart, setCart] = useContext(CartContext);

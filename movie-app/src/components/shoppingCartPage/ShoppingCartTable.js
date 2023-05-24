@@ -1,7 +1,7 @@
-import CartItem from "./shoppingCartPage/CartItem";
+import CartItem from "./CartItem";
 import {Table} from "react-bootstrap";
 import {useContext, useState} from "react";
-import {CartContext} from "../CartContext";
+import {CartContext} from "../../CartContext";
 
 
 export default function ShoppingCartTable() {

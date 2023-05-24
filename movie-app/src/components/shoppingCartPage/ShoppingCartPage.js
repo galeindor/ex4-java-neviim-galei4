@@ -1,4 +1,4 @@
-import ShoppingCartTable from "../ShoppingCartTable";
+import ShoppingCartTable from "./ShoppingCartTable";
 import {Col, Container, Row} from "react-bootstrap";
 import CheckoutDetails from "./CheckoutDetails";
 import {useContext, useEffect, useState} from "react";
