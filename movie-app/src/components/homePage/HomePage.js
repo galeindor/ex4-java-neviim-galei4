@@ -1,6 +1,6 @@
 import {Col, Container, Row} from "react-bootstrap";
-import SearchBar from "../SearchBar";
-import MediaList from "../MediaList";
+import SearchBar from "./SearchBar";
+import MediaList from "./MediaList";
 import MediaReducer from "../../reducers/MediaReducer";
 import {useEffect, useReducer, useState} from "react";
 import {TMDB_API_KEY} from "../../constants";

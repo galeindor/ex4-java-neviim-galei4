@@ -1,5 +1,5 @@
 import {Button, ListGroup} from "react-bootstrap";
-import {CURRENCY} from "../constants";
+import {CURRENCY} from "../../constants";
 import {Link} from "react-router-dom";
 
 

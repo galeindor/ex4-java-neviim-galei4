@@ -1,6 +1,6 @@
 import ShoppingCartTable from "../ShoppingCartTable";
 import {Col, Container, Row} from "react-bootstrap";
-import CheckoutDetails from "../CheckoutDetails";
+import CheckoutDetails from "./CheckoutDetails";
 import {useContext, useEffect, useState} from "react";
 import {cartConstants, REST_API_URL} from "../../constants";
 import {CartContext} from "../../CartContext";

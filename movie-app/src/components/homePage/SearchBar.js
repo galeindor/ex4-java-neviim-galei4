@@ -1,11 +1,11 @@
 import {Button, Form, InputGroup} from "react-bootstrap";
-import {TMDB_API_KEY, TMDB_BASE_URL} from "../constants";
+import {TMDB_API_KEY, TMDB_BASE_URL} from "../../constants";
 import SearchHistory from "./SearchHistory";
 import {useEffect, useReducer, useState} from "react";
 import SearchFilter from "./SearchFilter";
-import SearchFiltersReducer from "../reducers/SearchFiltersReducer";
-import {useFetch} from "../customHooks/useFetch";
-import LoadingSpinner from "./LoadingSpinner";
+import SearchFiltersReducer from "../../reducers/SearchFiltersReducer";
+import {useFetch} from "../../customHooks/useFetch";
+import LoadingSpinner from "../LoadingSpinner";
 
 
 export default function SearchBar({setMedia}) {

@@ -1,8 +1,8 @@
 import {Card, Col, Modal, Row, Toast, ToastContainer} from "react-bootstrap";
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {cartConstants, ITEM_FIXED_PRICE, REST_API_URL, TMDB_IMAGE_BASE_URL} from "../constants";
-import {CartContext} from "../CartContext";
+import {cartConstants, ITEM_FIXED_PRICE, REST_API_URL, TMDB_IMAGE_BASE_URL} from "../../constants";
+import {CartContext} from "../../CartContext";
 
 export default function MediaItem({item}) {
 

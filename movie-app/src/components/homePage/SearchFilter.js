@@ -1,6 +1,6 @@
 import {Button, Container, Form, Offcanvas, Row} from "react-bootstrap";
 import {useEffect, useState} from "react";
-import {TMDB_API_KEY, TMDB_BASE_URL} from "../constants";
+import {TMDB_API_KEY, TMDB_BASE_URL} from "../../constants";
 
 export default function SearchFilter({searchFilters, dispatchFilters, setCurrentSearch, currentSearch, onSubmit}) {
     const [show, setShow] = useState(false);

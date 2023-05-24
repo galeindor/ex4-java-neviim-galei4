@@ -5,7 +5,6 @@ import {useEffect, useState} from "react";
 import LoadingSpinner from "../LoadingSpinner";
 
 export default function CheckoutPage() {
-
     const [total, setTotal] = useState(1);
     const [errors, setErrors] = useState({email: '', firstName: '', lastName: '', error: ''});
     const [isLoading, setIsLoading] = useState(false);

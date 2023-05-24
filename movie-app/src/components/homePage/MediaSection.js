@@ -11,7 +11,6 @@ export default function MediaSection() {
                 <SearchBar setMovies={setMovies}/>
             </Row>
             <MediaList movies={movies}/>
-
         </Col>
     )
 }

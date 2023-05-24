@@ -1,4 +1,4 @@
-import CartItem from "./CartItem";
+import CartItem from "./shoppingCartPage/CartItem";
 import {Table} from "react-bootstrap";
 import {useContext, useState} from "react";
 import {CartContext} from "../CartContext";
