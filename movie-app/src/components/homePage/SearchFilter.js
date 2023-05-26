@@ -58,7 +58,6 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
     }, []);
 
     useEffect(() => {
-        console.log(searchFilters);
         if (searchFilters.media_type === "movie") {
             setGenresOptions(genres.movie_genres);
             // remove tv genres from genreIds
@@ -73,9 +72,18 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
                 const genre = genres.tv_genres.find((genre) => genre.id === genreId);
                 return genre !== undefined;
             }));
+        } else {
+            setGenresOptions([]);
         }
 
     }, [searchFilters]);
+
+    const submitFilters = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onSubmit(e.target[0].value, true) // search with filters
+        handleClose();
+    }
 
     return (
         <>
@@ -87,17 +95,12 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Container>
-                        <Form onSubmit={(e) => {
-                            e.preventDefault();
-                            setGenreIds([])
-                            onSubmit(e.target[0].value, true) // search with filters
-                            handleClose();
-                        }}>
+                        <Form onSubmit={submitFilters}>
 
                             <Row>
                                 <Form.Label className={"col-4"}>Search Query</Form.Label>
                                 <Form.Control className={"col mb-3"} type={"text"}
-                                              placeholder= {"Search Query"}
+                                              placeholder={"Search Query"}
                                               value={currentSearch}
                                               onChange={(e) => setCurrentSearch(e.target.value)}
                                               disabled={searchFilters.discover}/>

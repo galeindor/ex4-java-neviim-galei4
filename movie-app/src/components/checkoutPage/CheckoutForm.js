@@ -16,7 +16,6 @@ export default function CheckoutForm({total, emptyCart}) {
             lastName: e.target.lastName.value,
             payment: total
         }
-        console.log(data);
         if (!validateForm(data)) {
             return;
         }

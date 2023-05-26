@@ -29,22 +29,21 @@ export default function SearchBar({setMedia}) {
     }
 
     useEffect(() => {
+        if (data)
+            dispatch({type: "RESET"});
         if (data.results && data.results.length > 0) {
-            const filteredData = filterResults(data.results);
-            console.log(filteredData);
-            setMedia(filteredData);
+            const updatedData = addMediaType(data.results);
+            setMedia(updatedData);
         } else {
             setMedia([]); // if no results are found
         }
-    },[data])
+    }, [data])
 
     function createUrl(isComplexSearch) {
-        console.log(searchFilters);
         let url = search_url
             .replace("<TMDB_BASE_URL>", TMDB_BASE_URL)
             .replace("<api_key>", TMDB_API_KEY)
             .replace("<query>", currentSearch);
-
         if (!isComplexSearch) {
             return url
                 .replace("<media_type>", "multi")
@@ -70,7 +69,7 @@ export default function SearchBar({setMedia}) {
 
     }
 
-    function filterResults(results) {
+    function addMediaType(results) {
         let filteredResults = results;
         // add media_type to each item in the results
         filteredResults = filteredResults.map((item) => {
@@ -81,31 +80,32 @@ export default function SearchBar({setMedia}) {
     }
 
 
-    return (<Form className={"mt-2"} onSubmit={(e) => {
-        e.preventDefault();
-        onSubmit(currentSearch);
-    }}>
-        <InputGroup className="m-2">
-            <SearchFilter searchFilters={searchFilters}
-                          dispatchFilters={dispatch}
-                          setCurrentSearch={setCurrentSearch}
-                          currentSearch={currentSearch}
-                          onSubmit={onSubmit}
-            />
-            <Form.Control onInput={(e) => setCurrentSearch(e.target.value)}
-                          type="text"
-                          autoComplete={"off"}
-                          name={"search"}
-                          value={currentSearch}
-                          placeholder="Search for a item"
-                          aria-label="Search for a item"
-                          aria-describedby="item-search"
-            />
-            <Button variant="outline-secondary" type="submit">Submit</Button>
-        </InputGroup>
-        {isLoading && <LoadingSpinner/>}
-        <SearchHistory history={searchHistory}
-                       setHistory = {setSearchHistory}
-                       currentSearch={currentSearch} setCurrentSearch={setCurrentSearch}/>
-    </Form>)
+    return (
+        <Form className={"mt-2"} onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(currentSearch);
+        }}>
+            <InputGroup className="m-2">
+                <SearchFilter searchFilters={searchFilters}
+                              dispatchFilters={dispatch}
+                              setCurrentSearch={setCurrentSearch}
+                              currentSearch={currentSearch}
+                              onSubmit={onSubmit}
+                />
+                <Form.Control onInput={(e) => setCurrentSearch(e.target.value)}
+                              type="text"
+                              autoComplete={"off"}
+                              name={"search"}
+                              value={currentSearch}
+                              placeholder="Search for a item"
+                              aria-label="Search for a item"
+                              aria-describedby="item-search"
+                />
+                <Button variant="outline-secondary" type="submit">Submit</Button>
+            </InputGroup>
+            {isLoading && <LoadingSpinner/>}
+            <SearchHistory history={searchHistory}
+                           setHistory={setSearchHistory}
+                           currentSearch={currentSearch} setCurrentSearch={setCurrentSearch}/>
+        </Form>)
 }

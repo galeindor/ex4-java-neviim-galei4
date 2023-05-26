@@ -24,7 +24,6 @@ export const useFetch = (initialData) => {
             setIsLoading(true);
             try {
                 const result = await doAxios();
-                console.log(result);
                 setData(result.data);
             } catch (error) {
                 console.log(error);
