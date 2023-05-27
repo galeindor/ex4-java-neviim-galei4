@@ -1,5 +1,5 @@
 import {Button, Form, InputGroup} from "react-bootstrap";
-import {TMDB_API_KEY, TMDB_BASE_URL} from "../../constants";
+import {mediaTypes, TMDB_API_KEY, TMDB_BASE_URL} from "../../constants";
 import SearchHistory from "./SearchHistory";
 import {useEffect, useReducer, useState} from "react";
 import SearchFilter from "./SearchFilter";
@@ -19,12 +19,11 @@ export default function SearchBar({setMedia}) {
     const [searchFilters, dispatch] = useReducer(SearchFiltersReducer, initialSearchFilters, () => initialSearchFilters);
     const search_url = "<TMDB_BASE_URL>/<is_search>/<media_type>?api_key=<api_key>&query=<query>&include_adult=false";
 
-    function onSubmit(value, isComplexSearch = false) {
-        setCurrentSearch(value);
-        if (!searchHistory.includes(value)) { // if the search history does not include the current search
-            setSearchHistory([...searchHistory, value]);
-        }
-        const url = createUrl(isComplexSearch);
+    function onSubmit(query, isComplexSearch = false) {
+        setCurrentSearch(query);
+        if (!searchFilters.discover)
+            addToSearchHistory(query);
+        const url = createUrl(query,isComplexSearch);
         doFetch(url);
     }
 
@@ -39,11 +38,11 @@ export default function SearchBar({setMedia}) {
         }
     }, [data])
 
-    function createUrl(isComplexSearch) {
+    function createUrl(query, isComplexSearch) {
         let url = search_url
             .replace("<TMDB_BASE_URL>", TMDB_BASE_URL)
             .replace("<api_key>", TMDB_API_KEY)
-            .replace("<query>", currentSearch);
+            .replace("<query>", query);
         if (!isComplexSearch) {
             return url
                 .replace("<media_type>", "multi")
@@ -79,6 +78,26 @@ export default function SearchBar({setMedia}) {
         return filteredResults;
     }
 
+    function addToSearchHistory(query) {
+
+        const mediaText = {
+            [mediaTypes.ALL]: "all",
+            [mediaTypes.MOVIE]: "movies",
+            [mediaTypes.TV]: "tv shows",
+        }
+        const historyItem = {
+            query: query,
+            text: `Search for "${query}" in ${mediaText[searchFilters.media_type]}`,
+        }
+        let isDuplicate = false;
+        searchHistory.forEach((item) => {
+            if (item.query === query && item.text === historyItem.text) {
+                isDuplicate = true;
+            }
+        });
+        if (isDuplicate) return; // don't add duplicate items
+        setSearchHistory([...searchHistory, historyItem]);
+    }
 
     return (
         <Form className={"mt-2"} onSubmit={(e) => {
@@ -106,6 +125,8 @@ export default function SearchBar({setMedia}) {
             {isLoading && <LoadingSpinner/>}
             <SearchHistory history={searchHistory}
                            setHistory={setSearchHistory}
-                           currentSearch={currentSearch} setCurrentSearch={setCurrentSearch}/>
+                           currentSearch={currentSearch}
+                           setCurrentSearch={onSubmit}
+            />
         </Form>)
 }

@@ -32,11 +32,11 @@ export default function CheckoutDetails({cartItems, emptyCart}) {
                         <Button variant="secondary" className={"col-8 float-start"} title={"checkout"}>
                             <Image src={"../icons/checkout.png"} width={30} alt={"checkout"}/>
                         </Button>
-                        <Button variant="outline-danger" className={"cold-2 float-end"} onClick={emptyCart}
-                                title={"empty-cart"}>
-                            <Image src={"../icons/empty_cart.png"} width={30} alt={"empty-cart"}/>
-                        </Button>
                     </Link>
+                    <Button variant="outline-danger" className={"cold-2 float-end"} onClick={emptyCart}
+                            title={"empty-cart"}>
+                        <Image src={"../icons/empty_cart.png"} width={30} alt={"empty-cart"}/>
+                    </Button>
                 </ListGroup.Item>
             </ListGroup>
 
