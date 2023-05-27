@@ -1,6 +1,6 @@
 import {Col, Container, Row} from "react-bootstrap";
-import SearchBar from "../SearchBar";
-import MediaList from "../MediaList";
+import SearchBar from "./SearchBar";
+import MediaList from "./MediaList";
 import MediaReducer from "../../reducers/MediaReducer";
 import {useEffect, useReducer, useState} from "react";
 import {TMDB_API_KEY} from "../../constants";
@@ -28,7 +28,7 @@ export default function HomePage() {
             setIsLoading(true)
             const url = `https://api.themoviedb.org/3/trending/all/day?api_key=${TMDB_API_KEY}`;
             try {
-                const response = await axios(url);
+                const response = await axios.get(url);
                 const data = response.data;
                 await setMedia(data.results);
                 setMessage('Trending Today')

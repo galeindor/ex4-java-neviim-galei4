@@ -1,5 +1,5 @@
-import {CURRENCY, REST_API_URL} from "../constants";
-import {useFetch} from "../customHooks/useFetch";
+import {CURRENCY, REST_API_URL} from "../../constants";
+import {useFetch} from "../../customHooks/useFetch";
 import {useEffect} from "react";
 
 export default function CartItem({item, deleteItem, showErrors}) {

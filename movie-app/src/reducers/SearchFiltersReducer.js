@@ -1,7 +1,16 @@
+import {mediaTypes} from "../constants";
+
 export default function SearchFiltersReducer(filters, action) {
 
-    const discoverMediaType = filters.media_type !== "multi" ? filters.media_type : "movie";
+    const discoverMediaType = filters.media_type !== mediaTypes.ALL ? filters.media_type : mediaTypes.MOVIE;
     switch (action.type) {
+        case 'RESET':
+            return {
+                media_type: "multi",
+                discover: false,
+                release_year: "",
+                with_genres: []
+            }
         case 'MEDIA_TYPE':
             return {...filters, media_type: action.payload};
         case 'RELEASE_YEAR':

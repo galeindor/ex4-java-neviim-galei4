@@ -6,10 +6,10 @@ export const useFetch = (initialData) => {
     const [url, setUrl] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({});
-    const [method, setMethod] = useState("get");
+    const [method, setMethod] = useState('GET');
     const [body, setBody] = useState({});
 
-    function setValues(url, method, body = {}) {
+    function setValues(url, method = 'GET', body = {}) {
         setUrl(url);
         setMethod(method);
         setBody(body);
@@ -24,9 +24,9 @@ export const useFetch = (initialData) => {
             setIsLoading(true);
             try {
                 const result = await doAxios();
-                console.log(result);
                 setData(result.data);
             } catch (error) {
+                console.log(error);
                 setUrl("") // reset url to empty string to allow refetching the same url in case of error
                 setErrors({
                     message: error.message,
@@ -39,8 +39,8 @@ export const useFetch = (initialData) => {
         };
 
         async function doAxios() {
-            switch (method) {
-                case 'post' || 'put':
+            switch (method.toUpperCase()) {
+                case 'POST' || 'PUT':
                     return axios({url, method, data: body, headers: {'Content-Type': 'application/json'}});
                 default:
                     return axios({url, method});

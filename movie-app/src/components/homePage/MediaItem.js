@@ -1,8 +1,16 @@
 import {Card, Col, Modal, Row, Toast, ToastContainer} from "react-bootstrap";
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {cartConstants, ITEM_FIXED_PRICE, REST_API_URL, TMDB_IMAGE_BASE_URL} from "../constants";
-import {CartContext} from "../CartContext";
+import {
+    BG_COLOR,
+    cartConstants,
+    CURRENCY,
+    ITEM_FIXED_PRICE,
+    ITEM_ORIGINAL_PRICE,
+    REST_API_URL,
+    TMDB_IMAGE_BASE_URL
+} from "../../constants";
+import {CartContext} from "../../CartContext";
 
 export default function MediaItem({item}) {
 
@@ -32,7 +40,7 @@ export default function MediaItem({item}) {
 
             const success = await response.data;
             setMessage(success ? cartConstants.ADD_SUCCESS : cartConstants.ADD_FAILURE)
-            if(success) // add to cart only if success
+            if (success) // add to cart only if success
                 setCart([...cart, itemData]);
         } catch (e) {
             setMessage(cartConstants.ADD_ERROR);
@@ -41,7 +49,7 @@ export default function MediaItem({item}) {
     }
 
     useEffect(() => {
-        setSuccess(message === cartConstants.ADD_SUCCESS )
+        setSuccess(message === cartConstants.ADD_SUCCESS)
         if (message !== "") {
             const timer = setTimeout(() => {
                 setMessage("");
@@ -78,7 +86,7 @@ export default function MediaItem({item}) {
 
             {message &&
                 <ToastContainer className={success ? "bg-success" : "bg-danger"} style={styles.toast}>
-                    <Toast >
+                    <Toast>
                         <Toast.Body>{message}</Toast.Body>
                     </Toast>
                 </ToastContainer>
@@ -98,7 +106,11 @@ export default function MediaItem({item}) {
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                    <img src={"./icons/add_to_cart.png"} alt={"item.name"} onClick={addToCart}/>
+                    <p className={"fw-bold text-decoration-line-through"}> {ITEM_ORIGINAL_PRICE + CURRENCY}</p>
+                    <p className={"col fw-bold text-danger"}> {ITEM_FIXED_PRICE + CURRENCY}</p>
+                    <Row>
+                        <img src={"./icons/add_to_cart.png"} alt={"item.name"} onClick={addToCart}/>
+                    </Row>
                 </Modal.Footer>
             </Modal>
 
