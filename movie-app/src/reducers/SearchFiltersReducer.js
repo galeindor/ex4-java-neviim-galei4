@@ -6,19 +6,16 @@ export default function SearchFiltersReducer(filters, action) {
     switch (action.type) {
         case 'RESET':
             return {
-                media_type: "multi",
+                media_type: filters.media_type ? filters.media_type : mediaTypes.ALL,
                 discover: false,
                 release_year: "",
                 with_genres: []
             }
         case 'MEDIA_TYPE':
             return {...filters, media_type: action.payload};
-        case 'RELEASE_YEAR':
+        case 'h':
             return {
-                ...filters,
-                release_year: action.payload,
-                discover: action.payload !== "",
-                media_type: discoverMediaType
+                ...filters, release_year: action.payload, discover: action.payload !== "", media_type: discoverMediaType
             };
         case 'WITH_GENRES':
             return {

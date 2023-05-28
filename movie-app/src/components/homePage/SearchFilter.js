@@ -81,6 +81,11 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
     const submitFilters = (e) => {
         e.preventDefault();
         e.stopPropagation();
+        console.log(e.target[0].value === '', searchFilters.discover);
+        if (e.target[0].value === " " && !searchFilters.discover) {
+            return;
+        }
+        console.log("submitting filters");
         onSubmit(e.target[0].value, true) // search with filters
         handleClose();
     }
