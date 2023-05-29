@@ -13,7 +13,6 @@ export default function HomePage() {
     const [media, dispatch] = useReducer(MediaReducer, [], () => {});
     const [message, setMessage] = useState('');
     const setMedia = async (data) => {
-        setMessage('Search Results');
         dispatch({type: 'RESET', payload: data});
         for (const item of data) {
             dispatch({type: item.media_type.toUpperCase(), payload: item});
@@ -27,7 +26,6 @@ export default function HomePage() {
         const fetchTrending = async () => {
             const url = `${TMDB_BASE_URL}/trending/all/day?api_key=${TMDB_API_KEY}`;
             doFetch(url);
-            setMessage('Trending Today')
         }
         fetchTrending();
     }, []);
@@ -38,6 +36,7 @@ export default function HomePage() {
         }
         if(data && data.results) {
             setMedia(data.results);
+            setMessage("")
         }
     }, [data]);
 

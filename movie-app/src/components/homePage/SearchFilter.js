@@ -89,7 +89,7 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
 
     return (
         <>
-            <img src={"./icons/filter.png"} height={"30"} className={"mt-1"} onClick={handleShow} alt={"filterIcon"}/>
+            <img src={"./icons/filter.png"} height={"30"} className={"mt-1 me-1"} onClick={handleShow} alt={"filterIcon"}/>
 
             <Offcanvas show={show} onHide={handleClose} scroll={true} style={{backgroundColor: BG_COLOR}}>
                 <Offcanvas.Header closeButton>
