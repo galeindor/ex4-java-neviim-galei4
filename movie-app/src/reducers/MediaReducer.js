@@ -20,7 +20,7 @@ export default function MediaReducer(media, action) {
         case 'TV':
             return [...media, {name, poster_path, overview, id, release_date, media_type}];
         case 'MULTI':
-            return [...media, {name, poster_path, overview, id, release_date, media_type}];
+            return [...media, {name: (!!title ? title : name) , poster_path, overview, id, release_date, media_type}];
         case 'PERSON':
             return media; // prevent adding person type items to media
         default:
