@@ -2,6 +2,13 @@ import {CURRENCY, REST_API_URL} from "../../constants";
 import {useFetch} from "../../customHooks/useFetch";
 import {useEffect} from "react";
 
+/**
+ * Component that renders an item in the cart
+ * @param item - the item to be rendered
+ * @param deleteItem - function to delete the item from the cart
+ * @param showErrors - function to show errors
+ * @returns {JSX.Element} - the component
+ */
 export default function CartItem({item, deleteItem, showErrors}) {
     const [{data, errors}, doFetch] = useFetch(false);
 

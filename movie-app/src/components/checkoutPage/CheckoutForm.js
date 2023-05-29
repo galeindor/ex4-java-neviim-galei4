@@ -8,6 +8,13 @@ export default function CheckoutForm({total, emptyCart}) {
     const [{data, isLoading, errors}, doFetch] = useFetch(false);
     const [fieldErrors, setFieldErrors] = useState({email: '', firstName: '', lastName: '', error: ''});
 
+    /**
+     * Handles the form submission and calls the checkout endpoint
+     * validates the form before submission and displays errors if any
+     * if checkout is successful , empties the cart
+     * @param e {Event} form submission event
+     * @returns {Promise<void>} void
+     */
     async function onSubmit(e) {
         e.preventDefault();
         const data = {

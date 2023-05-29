@@ -7,7 +7,12 @@ import SearchFiltersReducer from "../../reducers/SearchFiltersReducer";
 import {useFetch} from "../../customHooks/useFetch";
 import LoadingSpinner from "../LoadingSpinner";
 
-
+/**
+ * SearchBar component that allows users to search for movies and tv shows
+ * @param setMedia - function to set the media state
+ * @returns {JSX.Element} - SearchBar component
+ * @constructor - SearchBar
+ */
 export default function SearchBar({setMedia}) {
 
     const [{data, isLoading, errors}, doFetch] = useFetch({})

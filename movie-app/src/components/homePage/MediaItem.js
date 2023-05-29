@@ -2,7 +2,6 @@ import {Card, Col, Modal, Row, Toast, ToastContainer} from "react-bootstrap";
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {
-    BG_COLOR,
     cartConstants,
     CURRENCY,
     ITEM_FIXED_PRICE,
@@ -14,13 +13,20 @@ import {CartContext} from "../../CartContext";
 
 export default function MediaItem({item}) {
 
-    const [cart, setCart] = useContext(CartContext)
+    // Constants for the item
     const posterPath = `${TMDB_IMAGE_BASE_URL}/original${item.poster_path}`;
     const img_url = item.poster_path ? posterPath : './default.png';
+
+    const [cart, setCart] = useContext(CartContext)
     const [isHovered, setIsHovered] = useState(false);
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
+
+    /**
+     * Add item to cart
+     * @returns {Promise<void>}
+     */
     const addToCart = async () => {
         const itemData = {
             "id": item.id,
@@ -57,6 +63,9 @@ export default function MediaItem({item}) {
             return () => clearTimeout(timer);
         }
     }, [message]);
+
+    // Modal functions and styles for the item card
+    // functions handle the modal show and close and item card hover
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const MouseOver = () => setIsHovered(true);

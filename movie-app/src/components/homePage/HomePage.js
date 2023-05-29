@@ -8,6 +8,12 @@ import Message from "../Message";
 import LoadingSpinner from "../LoadingSpinner";
 import {useFetch} from "../../customHooks/useFetch";
 
+/**
+ * This component is the home page of the app
+ * @returns {JSX.Element} Home Page
+ * @constructor Home Page
+ * @exports HomePage
+ */
 export default function HomePage() {
     const [{data, isLoading, errors}, doFetch] = useFetch([]);
     const [media, dispatch] = useReducer(MediaReducer, [], () => {});

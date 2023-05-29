@@ -2,6 +2,16 @@ import {Button, Container, Form, Offcanvas, Row} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {BG_COLOR, mediaTypes, TMDB_API_KEY, TMDB_BASE_URL} from "../../constants";
 
+/**
+ * SearchFilter component is used to create a complex search query
+ * @param searchFilters - the current search filters
+ * @param dispatchFilters - dispatch function to update the search filters
+ * @param setCurrentSearch - function to update the current search
+ * @param currentSearch - the current search
+ * @param onSubmit - function to submit the search
+ * @returns {JSX.Element} - the search filter component
+ * @constructor - the search filter component
+ */
 export default function SearchFilter({searchFilters, dispatchFilters, setCurrentSearch, currentSearch, onSubmit}) {
     const [show, setShow] = useState(false);
     const [genres, setGenres] = useState({movie_genres: [], tv_genres: []}); // genres from TMDB

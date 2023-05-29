@@ -23,7 +23,7 @@ public class MediaController {
     }
 
     @PostMapping("/")
-    public boolean addProduct(@RequestBody Product product) {
+    synchronized public boolean addProduct(@RequestBody Product product) {
         for (Product p : products) {
             if (p.getId() == product.getId()) { // product already exists
                 return false;
@@ -33,7 +33,7 @@ public class MediaController {
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteProduct(@PathVariable int id) {
+    synchronized public boolean deleteProduct(@PathVariable int id) {
         for (Product p : products) {
             if (p.getId() == id) {
                 return products.remove(p);
@@ -43,7 +43,7 @@ public class MediaController {
     }
 
     @GetMapping("/total")
-    public Map<String, Double> getTotal() {
+    synchronized public Map<String, Double> getTotal() {
         double total = 0;
         double tax = 0;
         double subTotal = 0;

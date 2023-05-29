@@ -3,6 +3,11 @@ import {Link, Outlet} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {CartContext} from "../CartContext";
 
+/**
+ * Layout component for the app that contains the navbar and the outlet for the routes to be rendered
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Layout() {
     const [cart, setCart] = useContext(CartContext);
     const [length, setLength] = useState(0);

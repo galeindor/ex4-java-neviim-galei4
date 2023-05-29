@@ -11,6 +11,10 @@ import {CartContext} from "./CartContext";
 const App = () => {
     const [cart, setCart] = useState([]);
 
+    /**
+     * Effect to get the cart from the REST API
+     * @returns {Promise<void>} cart from the REST API
+     */
     useEffect(() => {
         async function getCart() {
             const response = await fetch(REST_API_URL);
@@ -20,8 +24,8 @@ const App = () => {
 
         getCart().catch(e => console.log(e));
     }, []);
-    return (
-        <CartContext.Provider value={[cart, setCart]}>
+
+    return (<CartContext.Provider value={[cart, setCart]}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout/>}>
@@ -32,7 +36,6 @@ const App = () => {
                     </Route>
                 </Routes>
             </BrowserRouter>
-        </CartContext.Provider>
-    );
+        </CartContext.Provider>);
 };
 export default App;

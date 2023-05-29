@@ -1,6 +1,12 @@
 import MediaItem from "./MediaItem";
 import {Row} from "react-bootstrap";
 
+/**
+ * Media list component that renders a list of media items
+ * @param media - array of media items
+ * @returns {JSX.Element} - Media list component
+ * @constructor MediaList
+ */
 export default function MediaList({media}) {
     return (
         <Row>

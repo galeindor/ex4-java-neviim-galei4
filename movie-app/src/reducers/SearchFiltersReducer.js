@@ -1,5 +1,17 @@
 import {mediaTypes} from "../constants";
 
+/**
+ * Reducer for search filters state
+ * @param filters - current state
+ * @param action - action to be performed
+ * possible actions types:
+ * - RESET - reset all filters
+ * - MEDIA_TYPE - set media type
+ * - RELEASE_YEAR - set release year
+ * - WITH_GENRES - set genres
+ * @returns {(*&{discover: boolean, media_type: (string|*), with_genres})|{discover: boolean, media_type: (string|*), release_year: string, with_genres: *[]}|*|(*&{media_type})|(*&{discover: boolean, media_type: (string|*), release_year})}
+ * @constructor - SearchFiltersReducer
+ */
 export default function SearchFiltersReducer(filters, action) {
 
     const discoverMediaType = filters.media_type !== mediaTypes.ALL ? filters.media_type : mediaTypes.MOVIE;

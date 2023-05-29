@@ -5,6 +5,11 @@ import {useEffect, useState} from "react";
 import LoadingSpinner from "../LoadingSpinner";
 import CheckoutForm from "./CheckoutForm";
 
+/**
+ * Checkout page component
+ * @returns {JSX.Element} Checkout page component
+ * @constructor CheckoutPage
+ */
 export default function CheckoutPage() {
     const [total, setTotal] = useState(1)
     const [isLoading, setIsLoading] = useState(false);
