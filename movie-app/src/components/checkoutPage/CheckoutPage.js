@@ -52,7 +52,7 @@ export default function CheckoutPage() {
     return (
         <Container>
             <Row>
-                {error ? <h2 className={"text-center"}>{error.message}</h2> :
+                {error.message ? <h2 className={"text-center"}>{error.message}</h2> :
                     <CheckoutForm emptyCart={emptyCart} total={total}/>}
             </Row>
             {isLoading && <LoadingSpinner/>}
