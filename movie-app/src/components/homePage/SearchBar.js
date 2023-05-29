@@ -20,7 +20,7 @@ export default function SearchBar({setMedia}) {
     const search_url = "<TMDB_BASE_URL>/<is_search>/<media_type>?api_key=<api_key>&query=<query>&include_adult=false";
 
     function onSubmit(query, isComplexSearch = false) {
-            if(query === "")
+        if (query === "")
             return;
         setCurrentSearch(query);
         if (!searchFilters.discover) addToSearchHistory(query);
@@ -72,25 +72,27 @@ export default function SearchBar({setMedia}) {
         let filteredResults = results;
         // add media_type to each item in the results
         filteredResults = filteredResults.map((item) => {
-            if (!item.media_type) item.media_type = searchFilters.media_type;
+            item.media_type = item.media_type ? item.media_type : searchFilters.media_type;
             return item;
         });
         return filteredResults;
     }
 
     function addToSearchHistory(query) {
-        console.log("addToSearchHistory" , query, searchFilters);
+        if (query === "")
+            return;
+        console.log("addToSearchHistory", query, searchFilters);
         const mediaText = {
             [mediaTypes.ALL]: "all", [mediaTypes.MOVIE]: "movies", [mediaTypes.TV]: "tv shows",
         }
         const historyItem = {
-            query: query,
-            text: `Search for "${query}" in ${mediaText[searchFilters.media_type]}`,
+            query: query.trim(),
+            text: `Search for "${query.trim()}" in ${mediaText[searchFilters.media_type]}`,
             media_type: searchFilters.media_type,
         }
         let isDuplicate = false;
         searchHistory.forEach((item) => {
-            if (item.query === query && item.text === historyItem.text) {
+            if (item.query === query.trim() && item.text === historyItem.text) {
                 isDuplicate = true;
             }
         });

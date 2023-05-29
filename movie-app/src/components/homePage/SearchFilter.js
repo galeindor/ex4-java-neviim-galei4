@@ -58,14 +58,14 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
     }, []);
 
     useEffect(() => {
-        if (searchFilters.media_type === "movie") {
+        if (searchFilters.media_type === mediaTypes.MOVIE) {
             setGenresOptions(genres.movie_genres);
             // remove tv genres from genreIds
             setGenreIds(genreIds.filter((genreId) => {
                 const genre = genres.movie_genres.find((genre) => genre.id === genreId);
                 return genre !== undefined;
             }));
-        } else if (searchFilters.media_type === "tv") {
+        } else if (searchFilters.media_type === mediaTypes.TV) {
             setGenresOptions(genres.tv_genres);
             // remove movie genres from genreIds
             setGenreIds(genreIds.filter((genreId) => {
@@ -81,13 +81,10 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
     const submitFilters = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log(e.target[0].value === '', searchFilters.discover);
-        if (e.target[0].value === " " && !searchFilters.discover) {
-            return;
+        if (e.target[0].value !== "" || searchFilters.discover) {
+            onSubmit(e.target[0].value, true) // search with filters
+            handleClose();
         }
-        console.log("submitting filters");
-        onSubmit(e.target[0].value, true) // search with filters
-        handleClose();
     }
 
     return (
@@ -113,17 +110,14 @@ export default function SearchFilter({searchFilters, dispatchFilters, setCurrent
 
                             <Row>
                                 <Form.Label className={"col-4"}>Media Type</Form.Label>
-                                <Form.Select className={"col mb-3"} onChange={setMediaType} id={"media_type"}>
+                                <Form.Select className={"col mb-3"} value={searchFilters.media_type}
+                                             onChange={setMediaType}>
                                     {!searchFilters.discover &&
-                                        <option defaultChecked={searchFilters.media_type === "multi"}
-                                                value={mediaTypes.ALL}>All</option>
+                                        <option value={mediaTypes.ALL}>All</option>
                                     }
-                                    <option defaultChecked={searchFilters.media_type === "movie"}
-                                            value={mediaTypes.MOVIE}>Movies
-                                    </option>
-                                    <option defaultChecked={searchFilters.media_type === "tv"}
-                                            value={mediaTypes.TV}>TV Shows
-                                    </option>
+                                    <option value={mediaTypes.MOVIE}>Movies</option>
+
+                                    <option value={mediaTypes.TV}>TV Shows</option>
                                 </Form.Select>
                             </Row> {/*media type*/}
 

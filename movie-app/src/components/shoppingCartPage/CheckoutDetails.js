@@ -10,9 +10,9 @@ export default function CheckoutDetails({cartItems, emptyCart}) {
     const total = subtotal + tax;
 
     const items = {
-        total: {name: "Total", price: total},
+        subtotal: {name: "Subtotal", price: subtotal},
         tax: {name: "Tax", price: tax},
-        subtotal: {name: "Subtotal", price: subtotal}
+        total: {name: "Total", price: total},
     }
     return (
         <>

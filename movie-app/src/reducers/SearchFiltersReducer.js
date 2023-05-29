@@ -13,7 +13,7 @@ export default function SearchFiltersReducer(filters, action) {
             }
         case 'MEDIA_TYPE':
             return {...filters, media_type: action.payload};
-        case 'h':
+        case 'RELEASE_YEAR':
             return {
                 ...filters, release_year: action.payload, discover: action.payload !== "", media_type: discoverMediaType
             };
@@ -25,6 +25,7 @@ export default function SearchFiltersReducer(filters, action) {
                 media_type: discoverMediaType
             };
         default:
-            throw new Error("Invalid action type");
+            console.log("invalid action type "+ action.type)
+            return filters
     }
 }
