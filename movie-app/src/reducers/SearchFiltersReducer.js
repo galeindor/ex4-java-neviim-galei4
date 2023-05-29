@@ -25,7 +25,6 @@ export default function SearchFiltersReducer(filters, action) {
                 media_type: discoverMediaType
             };
         default:
-            console.log("invalid action type "+ action.type)
             return filters
     }
 }

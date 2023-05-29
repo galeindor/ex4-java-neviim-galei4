@@ -1,11 +1,28 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/7Tmn2VQK)
 
 # Authors
-
+Gal Ein-Dor , galei@edu.hac.ac.il
 # Explanations
-
 ---------------------
+In this project I used the TMDB API to get the movies and tv shows data.
+The program contains 2 main parts:
+1. The server side - I used Spring Boot to create the server side of the project.
+2. The client side - I used React to create the client side of the project.
 
+The server side contains 2 main controllers:
+1. The media controller - This controller is responsible for store the Cart items in the Session.
+2. The purchase controller - This controller is responsible for store the purchase in the DB.
+
+The client side contains 3 pages:
+1. The home page - This page contains the search bar and the search results
+   1. The search bar - The search bar is responsible for searching movies and tv shows by name.
+   2. The search results - The search results are the results of the search bar.
+   3. The search filters - this is the section to insert the search filters , possible filters are:
+      1. The media type - The media type is responsible for filtering the results by media type (movie or tv show).
+      2. The genres - The genres is responsible for filtering the results by genres included.
+      3. The year - The year is responsible for filtering the results by year.
+2. The cart page - This page contains the cart items.
+3. The checkout page - This page contains the purchase form.
 
 # Initializing the template
 

@@ -12,7 +12,6 @@ export default function MediaReducer(media, action) {
         case 'PERSON':
             return media; // prevent adding person type items to media
         default:
-            console.log("MediaReducer: default case " + action.type + " not found");
             return media;
     }
 }

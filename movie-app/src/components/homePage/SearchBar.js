@@ -81,7 +81,6 @@ export default function SearchBar({setMedia}) {
     function addToSearchHistory(query) {
         if (query === "")
             return;
-        console.log("addToSearchHistory", query, searchFilters);
         const mediaText = {
             [mediaTypes.ALL]: "all", [mediaTypes.MOVIE]: "movies", [mediaTypes.TV]: "tv shows",
         }

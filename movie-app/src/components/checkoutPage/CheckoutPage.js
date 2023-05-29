@@ -14,6 +14,8 @@ export default function CheckoutPage() {
     useEffect(() => {
         async function getTotal() {
             const response = await axios.get(REST_API_URL + "/total");
+            if(response.data["total"] === 0) // if cart is empty
+                setError({message: "Cart is empty , please add items to cart to checkout"})
             setTotal(response.data["total"].toFixed(2));
         }
 
@@ -36,9 +38,9 @@ export default function CheckoutPage() {
     return (
         <Container>
             <Row>
-                <CheckoutForm emptyCart={emptyCart} total={total}/>
+                { error ? <h2 className={"text-center"}>{error.message}</h2> : <CheckoutForm emptyCart={emptyCart} total={total}/>}
             </Row>
-            {/*{isLoading && <LoadingSpinner/>}*/}
+            {isLoading && <LoadingSpinner/>}
         </Container>
     )
 }
