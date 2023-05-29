@@ -3,15 +3,15 @@ import SearchBar from "./SearchBar";
 import MediaList from "./MediaList";
 import MediaReducer from "../../reducers/MediaReducer";
 import {useEffect, useReducer, useState} from "react";
-import {TMDB_API_KEY} from "../../constants";
-import axios from "axios";
+import {TMDB_API_KEY, TMDB_BASE_URL} from "../../constants";
 import Message from "../Message";
 import LoadingSpinner from "../LoadingSpinner";
+import {useFetch} from "../../customHooks/useFetch";
 
 export default function HomePage() {
+    const [{data, isLoading, errors}, doFetch] = useFetch([]);
     const [media, dispatch] = useReducer(MediaReducer, [], () => {});
     const [message, setMessage] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
     const setMedia = async (data) => {
         setMessage('Search Results');
         dispatch({type: 'RESET', payload: data});
@@ -25,21 +25,21 @@ export default function HomePage() {
 
     useEffect(() => {
         const fetchTrending = async () => {
-            setIsLoading(true)
-            const url = `https://api.themoviedb.org/3/trending/all/day?api_key=${TMDB_API_KEY}`;
-            try {
-                const response = await axios.get(url);
-                const data = response.data;
-                await setMedia(data.results);
-                setMessage('Trending Today')
-            } catch (e) {
-                setMessage('Error Fetching Data , Please Try Again Later');
-            } finally {
-                setIsLoading(false);
-            }
+            const url = `${TMDB_BASE_URL}/trending/all/day?api_key=${TMDB_API_KEY}`;
+            doFetch(url);
+            setMessage('Trending Today')
         }
         fetchTrending();
     }, []);
+
+    useEffect(() => {
+        if (errors) {
+            setMessage('Error Fetching Data , Please Try Again Later');
+        }
+        if(data && data.results) {
+            setMedia(data.results);
+        }
+    }, [data]);
 
     return (
         <Container>
