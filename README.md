@@ -1,30 +1,39 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/7Tmn2VQK)
 
-# Authors
-Gal Ein-Dor , galei@edu.hac.ac.il
-# Explanations
----------------------
-In this project I used the TMDB API to get the movies and tv shows data.
-The program contains 2 main parts:
-1. The server side - I used Spring Boot to create the server side of the project.
-2. The client side - I used React to create the client side of the project.
+# TMDB Movies E-commence
 
-The server side contains 2 main controllers:
-1. The media controller - This controller is responsible for store the Cart items in the Session.
-2. The purchase controller - This controller is responsible for store the purchase in the DB.
+- **Project Overview:**
+  A comprehensive application leveraging the TMDB API to access movies and TV shows data, divided into server and client components.
 
-The client side contains 3 pages:
-1. The home page - This page contains the search bar and the search results
-   1. The search bar - The search bar is responsible for searching movies and tv shows by name.
-   2. The search results - The search results are the results of the search bar.
-   3. The search filters - this is the section to insert the search filters , possible filters are:
-      1. The media type - The media type is responsible for filtering the results by media type (movie or tv show).
-      2. The genres - The genres is responsible for filtering the results by genres included.
-      3. The year - The year is responsible for filtering the results by year.
-2. The cart page - This page contains the cart items.
-3. The checkout page - This page contains the purchase form.
+![image](https://github.com/galeindor/ex4-java-neviim-galei4/assets/73552373/fbb87889-9157-4b7a-9252-008ed3041c89)
 
-# Initializing the template
+- **Server-side (Spring Boot):**
+  - **Media Controller:** Responsible for managing Cart items within the user session.
+  - **Purchase Controller:** Handles the secure storage of purchase information in the database.
+
+- **Client-side (React):**
+  - **Home Page:** Central hub with a search bar for seamless navigation and real-time search result display.
+  - **Search Bar:** Empowers users to search for movies and TV shows by name.
+  - **Search Results:** Instantly showcases the outcome of search queries.
+  - **Search Filters:** Offers advanced filtering options including media type (movie or TV show), genres, and year.
+  - **Cart Page:** Displays selected items in the user's cart for review.
+  - **Checkout Page:** Streamlines the purchasing process with an integrated purchase form.
+
+- **Integration:**
+  - Utilizes the TMDB API to seamlessly access movie and TV show data.
+  - Integrates Spring Boot on the server-side for efficient data management.
+  - Leverages React on the client-side for dynamic and responsive user interfaces.
+
+- **User Experience:**
+  - Provides an immersive platform for enthusiasts to explore and discover their favorite entertainment content.
+  - Allows users to customize searches using various filters for refined results.
+  - Simplifies the cart and checkout process for a user-friendly shopping experience.
+
+- **Technical Stack:**
+  - Server-side: Spring Boot
+  - Client-side: React
+  - API Integration: TMDB API
+
+# Initializing the project
 
 In order to initialize the project make sure to:
 
@@ -44,12 +53,3 @@ that returns a list of all purchases in the DB (empty for now).
 
 Open a terminal in *movie-app* and run `npm install` and then `npm start`. You should see the client running on http://localhost:3000.
 You can also open another instance of IntelliJ and open the *movie-app* folder as a project. You can then run the client from there.
-
-## Using the provided code to store purchases in the DB
-
-We provide you with ready-to-use code to store purchases in the DB, in order to give you a taste of what Spring can do for you.
-Look at the DebugController class. It has a method called "addPurchase" that receives a Purchase object and stores it in the DB.
-When you develop your own controller, you must declare the repository member exactly as it is declared in the DebugController class.
-Then you can use it to store purchases in the DB (repository.save(purchase)).
-
-## Still have problems? Come to class.
