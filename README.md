@@ -43,7 +43,7 @@ In order to initialize the project make sure to:
 4. Edit your configuration "ex4" at the top right. Make sure the "Main class" is set to "hac.DemoApplication" and that Java is set
 
 Everything ok?
-1. Run the SQL server as shown in the video (week 6) and create a database named "ex4". The DB credentials are stored in the application.properties file. You may change them if you want.
+1. Run the SQL server and create a database named "ex4". The DB credentials are stored in the application.properties file. You may change them if you want.
 2. Run the project, you should not see any errors in IntelliJ console
 
 So far the only route you can check is http://localhost:8080/debug/purchases
