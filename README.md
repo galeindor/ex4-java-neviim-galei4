@@ -4,7 +4,7 @@
 - **Project Overview:**
   A comprehensive application leveraging the TMDB API to access movies and TV shows data, divided into server and client components.
 
-![image](https://github.com/galeindor/ex4-java-neviim-galei4/assets/73552373/fbb87889-9157-4b7a-9252-008ed3041c89)
+![image](https://github.com/galeindor/ex4-java-neviim-galei4/assets/73552373/c2a074ab-6adb-4271-9140-2d365cf548af)
 
 - **Server-side (Spring Boot):**
   - **Media Controller:** Responsible for managing Cart items within the user session.
